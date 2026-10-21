@@ -1,0 +1,55 @@
+@use "../global" as *;
+
+.archive-column {
+  .archive-column__list {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+
+    @include media-up(md) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      margin: 24px -16px 0;
+    }
+  }
+
+  .archive-column__item {
+    @include media-up(md) {
+      width: calc(100% / 3);
+      padding: 24px 16px;
+    }
+
+    & + .archive-column__item {
+      margin-top: 16px;
+
+      @include media-up(md) {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .column-nopost {
+    margin-top: 40px;
+
+    @include media-up(lg) {
+      margin-top: 80px;
+    }
+
+    .column-nopost__title {
+      font-size: 20px;
+      text-align: center;
+
+      @include media-up(lg) {
+        font-size: 28px;
+      }
+    }
+
+    .column-nopost__action {
+      margin-top: 40px;
+
+      @include media-up(lg) {
+        margin-top: 80px;
+      }
+    }
+  }
+}

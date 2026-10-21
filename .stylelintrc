@@ -1,0 +1,44 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-recess-order"
+  ],
+  "rules": {
+    "media-feature-range-notation": "prefix",
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": [
+          "return",
+          "function",
+          "extend",
+          "extends",
+          "ignores",
+          "mixin",
+          "content",
+          "include",
+          "custom-media",
+          "selector-class-pattern",
+          "use",
+          "forward",
+          "container"
+        ]
+      }
+    ],
+    "no-descending-specificity": null,
+    "selector-class-pattern": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "unit-allowed-list": [
+      "em",
+      "rem",
+      "s",
+      "px",
+      "%",
+      "deg",
+      "vw",
+      "vh",
+      "fr",
+      "cqw"
+    ]
+  }
+}

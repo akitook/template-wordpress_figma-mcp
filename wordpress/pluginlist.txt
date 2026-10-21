@@ -1,0 +1,9 @@
+https://downloads.wordpress.org/plugin/wp-multibyte-patch.zip
+https://github.com/wp-premium/advanced-custom-fields-pro/archive/master.zip
+https://downloads.wordpress.org/plugin/custom-post-type-permalinks.zip
+https://downloads.wordpress.org/plugin/password-protected.zip
+https://downloads.wordpress.org/plugin/wordpress-seo.zip
+https://downloads.wordpress.org/plugin/webp-converter-for-media.zip
+https://downloads.wordpress.org/plugin/contact-form-7.zip
+https://downloads.wordpress.org/plugin/contact-form-7-multi-step-module.zip
+https://downloads.wordpress.org/plugin/flamingo.zip

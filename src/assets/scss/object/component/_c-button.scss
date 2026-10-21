@@ -1,0 +1,74 @@
+@use "../../global" as *;
+
+.c-button {
+  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 48px;
+  color: $color-white;
+  background: $color-primary;
+  border: 2px solid $color-primary;
+  border-radius: 5px;
+  transition: all 0.2s;
+
+  &:hover {
+    color: $color-primary;
+    background: $color-white;
+  }
+
+  &--small {
+    width: 180px;
+    height: 40px;
+  }
+
+  &--large {
+    width: 320px;
+    height: 56px;
+    font-weight: bold;
+
+    @include media-up(md) {
+      font-size: 16px;
+    }
+  }
+
+  &--outlined {
+    color: $color-primary;
+    background: $color-white;
+
+    &:hover {
+      color: $color-white;
+      background-color: $color-primary;
+    }
+  }
+
+  &--rounded {
+    border-radius: 100vh;
+  }
+
+  &--gray {
+    color: $color-gray;
+    background-color: $color-gray-light;
+    border-color: $color-gray-light;
+
+    &:hover {
+      color: $color-gray-light;
+      background-color: $color-gray;
+      border-color: $color-gray;
+    }
+  }
+}
+
+.c-button-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  .c-button {
+    @include media-up(md) {
+      margin: 0 8px;
+    }
+  }
+}

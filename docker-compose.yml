@@ -1,0 +1,48 @@
+name: "${PROJECT_NAME}"
+services:
+  wordpress:
+    container_name: "${PROJECT_NAME}_wordpress"
+    build: ./wordpress
+    ports:
+      - 9000:80
+    depends_on:
+      - database
+    volumes:
+      - ./public:/var/www/html/
+    working_dir: /var/www/html/${WORDPRESS_DIR}
+    environment:
+      WORDPRESS_DB_HOST: database:3306
+    env_file: .env
+  database:
+    container_name: "${PROJECT_NAME}_db"
+    platform: linux/amd64
+    command:
+      - "--character-set-server=utf8mb4"
+      - "--collation-server=utf8mb4_unicode_ci"
+    ports:
+      - 3306:3306
+    image: mysql:8
+    volumes:
+      - db-data:/var/lib/mysql
+    env_file: .env
+  wordmove:
+    container_name: "${PROJECT_NAME}_wordmove"
+    platform: linux/amd64
+    tty: true
+    depends_on:
+      - wordpress
+    image: welaika/wordmove
+    volumes:
+      - ./wordmove:/home/wordmove
+      - ./public:/var/www/html
+      - ~/.ssh:/home/wordmove/.ssh
+    env_file: .env
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+    env_file: .env
+volumes:
+  db-data:
+    driver: local

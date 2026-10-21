@@ -1,0 +1,113 @@
+@use "../global" as *;
+
+.page-privacy {
+  // タイトル
+  .privacy-title {
+    padding: 0 10px;
+    margin: 24px 0 15px;
+    font-size: 18px;
+    line-height: 1.25;
+    border-left: 4px solid $color-primary;
+
+    @include media-up(md) {
+      padding: 0 15px;
+      margin: 48px 0 25px;
+      font-size: 26px;
+      border-left-width: 4px;
+    }
+  }
+
+  // 内容
+  .privacy-description {
+    line-height: 1.6;
+
+    p {
+      margin-top: 1em;
+    }
+
+    a {
+      color: $color-primary;
+      word-break: break-all;
+
+      @media (hover: hover) {
+        &:hover {
+          text-decoration: underline;
+          opacity: 1;
+        }
+      }
+    }
+
+    ul {
+      padding-left: 1em;
+      margin-top: 1em;
+
+      li {
+        list-style: disc;
+      }
+    }
+
+    ol {
+      padding-left: 1.6em;
+      margin-top: 1em;
+
+      li {
+        list-style: decimal;
+      }
+    }
+
+    ul,
+    ol {
+      ol {
+        padding-left: 0;
+        margin-top: 0;
+
+        li {
+          position: relative;
+          padding-left: 1.6em;
+          list-style-type: none;
+          counter-increment: cnt;
+
+          &::before {
+            position: absolute;
+            top: 0;
+            left: -0.2em;
+            width: 1.8em;
+            text-align: right;
+            content: "(" counter(cnt) ") ";
+          }
+        }
+      }
+
+      ul {
+        padding-left: 1em;
+        margin-top: 0;
+
+        li {
+          list-style: disc;
+        }
+      }
+
+      p {
+        margin-top: 0;
+      }
+    }
+
+    .info {
+      margin-top: 1em;
+
+      p {
+        margin-top: 0;
+      }
+
+      // .tel-link {
+      //   @include media-up(md) {
+      //     pointer-events: none;
+      //   }
+      // }
+    }
+  }
+
+  .privacy-date {
+    margin-top: 40px;
+  }
+}

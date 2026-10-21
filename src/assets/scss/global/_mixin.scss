@@ -1,0 +1,47 @@
+/* Mixin
+   ----------------------------------------------------------------- */
+@use "variable" as *;
+@use "sass:math";
+@use "sass:map";
+
+@mixin media-up($breakpoint: md) {
+  @media #{map.get($breakpoint-up, $breakpoint)} {
+    @content;
+  }
+}
+
+// @mixin media-down($breakpoint: md) {
+//   @media #{map-get($breakpoint-down, $breakpoint)} {
+//     @content;
+//   }
+// }
+
+@mixin container($max-width: lg) {
+  box-sizing: border-box;
+  width: 100%;
+  /* stylelint-disable-next-line scss/no-global-function-names */
+  max-width: #{map.get($container-width, $max-width)};
+  padding-right: 4vw;
+  padding-left: 4vw;
+  margin: 0 auto;
+
+  @include media-up(md) {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+
+@mixin hover() {
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+@function vw-responsive($vw-responsive-px, $pixelsVw) {
+  $responsivepx: map.get($vw-responsive-width, $vw-responsive-px);
+
+  @return math.div($pixelsVw, $responsivepx) * 100vw;
+}

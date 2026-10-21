@@ -1,0 +1,330 @@
+@use "../../global" as *;
+
+.p-form {
+  max-width: 840px;
+  margin: 0 auto;
+  border-top: 2px solid $color-gray-light;
+
+  /**
+  * error message
+  */
+  .error {
+    display: block;
+    margin-top: 0.5em;
+    font-size: 85%;
+    color: #b70000;
+  }
+}
+
+.p-form__group {
+  padding: 12px 0;
+
+  @include media-up(md) {
+    padding: 20px 0;
+  }
+}
+
+.p-form__group + .p-form__group {
+  border-top: 2px solid $color-gray-light;
+}
+
+.p-form__row {
+  padding: 12px 0;
+
+  @include media-up(md) {
+    display: flex;
+    align-items: center;
+  }
+
+  &--top {
+    @include media-up(md) {
+      align-items: flex-start;
+
+      > dt {
+        align-items: flex-start;
+        padding-top: 17px;
+      }
+    }
+  }
+
+  &--labeled {
+    @include media-up(md) {
+      align-items: flex-start;
+
+      > dt {
+        padding-top: 42px;
+      }
+    }
+  }
+
+  > dt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include media-up(md) {
+      flex-shrink: 0;
+      width: 27%;
+      padding-right: 20px;
+    }
+
+    @include media-up(xl) {
+      padding-right: 30px;
+    }
+
+    > label {
+      padding-right: 16px;
+      font-size: 13px;
+      font-weight: 500;
+
+      @include media-up(lg) {
+        font-size: 14px;
+      }
+
+      > small {
+        display: block;
+        font-size: 12px;
+        font-weight: normal;
+        color: $color-gray;
+
+        @include media-up(lg) {
+          font-size: 13px;
+        }
+      }
+    }
+
+    > .tag {
+      display: inline-block;
+      flex-shrink: 0;
+      height: 18px;
+      padding: 0 6px;
+      font-size: 10px;
+      line-height: 18px;
+      color: $color-white;
+      text-align: center;
+      letter-spacing: 0.1em;
+      background-color: $color-gray;
+      border-radius: 2px;
+
+      @include media-up(md) {
+        height: 22px;
+        padding: 0 10px;
+        font-size: 12px;
+        line-height: 22px;
+      }
+    }
+
+    > .tag--required {
+      color: $color-white;
+      background-color: $color-primary-light;
+    }
+  }
+
+  > dd {
+    margin-top: 6px;
+
+    @include media-up(md) {
+      flex-grow: 1;
+      margin-top: 0;
+    }
+  }
+}
+
+.p-form-controls {
+  display: flex;
+  margin: 0 -8px;
+
+  @include media-up(md) {
+    margin: 0 -12px;
+  }
+
+  .p-form-control {
+    flex-grow: 1;
+    padding: 0 8px;
+
+    @include media-up(md) {
+      padding: 0 12px;
+    }
+
+    & + .p-form-control {
+      margin-top: 0;
+    }
+  }
+}
+
+.p-form-control {
+  position: relative;
+
+  & + .p-form-control {
+    margin-top: 10px;
+
+    @include media-up(md) {
+      margin-top: 16px;
+    }
+  }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="email"],
+  input[type="tel"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    vertical-align: middle;
+    background-color: $color-primary-bg;
+    transition: border 0.2s ease-out;
+
+    @include media-up(md) {
+      padding: 16px;
+    }
+
+    &::placeholder {
+      color: rgba($color-gray, 0.4);
+    }
+
+    &:focus {
+      border-color: $color-primary;
+      outline: 0;
+      box-shadow: rgba($color-primary, 0.5) 0 0 5px 2px;
+    }
+  }
+
+  textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 12px;
+    vertical-align: middle;
+    background-color: $color-primary-bg;
+    transition: border 0.2s ease-out;
+
+    @include media-up(md) {
+      padding: 18px 16px;
+      font-size: 14px;
+    }
+
+    &::placeholder {
+      color: $color-gray;
+    }
+
+    &:focus {
+      border-color: $color-primary;
+      outline: 0;
+      box-shadow: rgba($color-primary, 0.5) 0 0 5px 2px;
+    }
+  }
+
+  > p {
+    margin-top: 4px;
+    color: $color-gray;
+  }
+
+  &--zip {
+    display: flex;
+
+    .c-input {
+      position: relative;
+      min-width: 120px;
+
+      @include media-up(md) {
+        min-width: 140px;
+      }
+
+      & + .c-input {
+        margin-left: 20px;
+
+        @include media-up(md) {
+          margin-left: 22px;
+        }
+
+        &::before {
+          position: absolute;
+          top: calc(50% + 12px);
+          left: -13px;
+          line-height: 0;
+          content: "-";
+        }
+      }
+    }
+  }
+}
+
+.p-form-radios,
+.mwform-radio-field {
+  &--horizontal {
+    @include media-up(md) {
+      display: flex;
+      margin: 0 -12px;
+    }
+  }
+}
+
+.p-form__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  text-align: center;
+
+  @include media-up(md) {
+    margin-top: 48px;
+  }
+
+  .back-btn {
+    display: block;
+    margin: 24px auto;
+
+    @include media-up(md) {
+      margin: 40px auto;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// for mw_wp_form
+
+.mw_wp_form .horizontal-item + .horizontal-item {
+  margin-left: 0;
+}
+
+.page-contact-confirm {
+  .p-form__row--labeled,
+  .p-form__row--top {
+    dt {
+      padding-top: 0;
+    }
+  }
+
+  .p-form-controls .p-form-control {
+    flex-grow: initial;
+  }
+
+  .p-form-control {
+    .c-input {
+      label {
+        display: none;
+      }
+    }
+
+    .c-select {
+      &::before {
+        display: none;
+      }
+    }
+
+    &--zip {
+      .c-input {
+        min-width: 0;
+
+        + .c-input::before {
+          top: 50%;
+        }
+      }
+    }
+  }
+
+  .p-form-radios--horizontal {
+    margin: 0;
+  }
+}

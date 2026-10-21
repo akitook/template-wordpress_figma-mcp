@@ -1,0 +1,62 @@
+// color
+$color-white: #fff;
+$color-black: #000;
+$color-gray: #657786;
+$color-gray-light: #e1e8ed;
+$color-gray-ultralight: #f7f7f7;
+$color-pink: #ed3e73;
+$color-red: #f25f6d;
+$color-yellow: #fad508;
+$color-orange: #f7a61e;
+$color-primary: #0016ff;
+$color-primary-dark: #0016ff;
+$color-primary-light: #4051ff;
+$color-primary-ultralight: #f8fafe;
+$color-primary-bg: #f0f1f7;
+
+// font-family
+
+$font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3",
+  meiryo, メイリオ, sans-serif;
+
+/* Noto Sansを使わない場合
+$font-sans: "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3",
+  Meiryo, メイリオ, sans-serif;
+*/
+$font-serif: georgia, 游明朝, "Yu Mincho", yumincho, "Hiragino Mincho ProN",
+  hgs明朝e, メイリオ, meiryo, serif;
+$font-sans-en: "Montserrat", sans-serif;
+
+// breakpoints bootstrapと共通
+$breakpoint-up: (
+  "xs": "screen and (min-width: 425px)",
+  "sm": "screen and (min-width: 554px)",
+  "md": "screen and (min-width: 768px)",
+  "lg": "screen and (min-width: 992px)",
+  "xl": "screen and (min-width: 1200px)",
+) !default;
+
+// $breakpoint-down: (
+//   "xs": "screen and (max-width: 424px)",
+//   "sm": "screen and (max-width: 553px)",
+//   "md": "screen and (max-width: 767px)",
+//   "lg": "screen and (max-width: 991px)",
+//   "xl": "screen and (max-width: 1199px)"
+// ) !default;
+
+// mixin containerのmax-width. XD上のwidth + 80px
+$container-width: (
+  "sm": 880px,
+  "md": 1080px,
+  "lg": 1280px,
+) !default;
+
+// @function vw-responsiveに使用するwidth値
+$vw-responsive-width: (
+  "xs": 375,
+  "md": 768,
+  "lg": 992,
+) !default;
+
+// tanrasitonを一括設定する場合
+// $transition: all 0.2s ease;

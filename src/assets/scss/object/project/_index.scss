@@ -1,0 +1,57 @@
+/* Project
+   ----------------------------------------------------------------- */
+// p-formは別ファイルで読み込み
+@use "../../global" as *;
+@use "./p-form";
+@use "./p-editor-content";
+@use "./p-pagination";
+
+.p-container {
+  @include container(md);
+}
+
+.p-container--lg {
+  @include container(lg);
+}
+
+.p-container--sm {
+  @include container(sm);
+}
+
+.p-section-title {
+  .p-section-title__en {
+    font-family: $font-sans-en;
+    font-size: 24px;
+    font-weight: bold;
+
+    @include media-up(lg) {
+      font-size: 32px;
+    }
+  }
+
+  .p-section-title__ja {
+    font-size: 12px;
+    font-weight: normal;
+    color: $color-gray;
+
+    @include media-up(lg) {
+      font-size: 14px;
+    }
+  }
+}
+
+.p-breadcrumb {
+  margin: 0 -8px;
+  font-size: 13px;
+  color: $color-gray;
+
+  a {
+    margin: 0 8px;
+    color: $color-gray;
+  }
+
+  .breadcrumb_last {
+    margin: 0 8px;
+    color: $color-primary;
+  }
+}

@@ -1,0 +1,35 @@
+/* Utility
+   ----------------------------------------------------------------- */
+@use "../../global" as *;
+
+.u-hide-up {
+  &-xs {
+    @include media-up(xs) {
+      display: none !important;
+    }
+  }
+
+  &-sm {
+    @include media-up(sm) {
+      display: none !important;
+    }
+  }
+
+  &-md {
+    @include media-up(md) {
+      display: none !important;
+    }
+  }
+
+  &-lg {
+    @include media-up(lg) {
+      display: none !important;
+    }
+  }
+
+  &-xl {
+    @include media-up(xl) {
+      display: none !important;
+    }
+  }
+}

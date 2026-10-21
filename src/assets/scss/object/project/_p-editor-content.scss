@@ -1,0 +1,248 @@
+@use "../../global" as *;
+
+.p-editor-content {
+  word-break: break-all;
+
+  h1 {
+    margin: 24px 0 15px;
+    font-size: 22px;
+
+    @include media-up(md) {
+      margin: 48px 0 25px;
+      font-size: 28px;
+    }
+  }
+
+  h2 {
+    padding: 0 10px;
+    margin: 24px 0 15px;
+    font-size: 18px;
+    line-height: 1.25;
+    border-left: 4px solid $color-primary;
+
+    @include media-up(md) {
+      padding: 0 15px;
+      margin: 48px 0 25px;
+      font-size: 26px;
+      border-left-width: 4px;
+    }
+  }
+
+  h3 {
+    position: relative;
+    padding-left: 24px;
+    margin: 24px 0 16px;
+    font-size: 16px;
+    line-height: 1.25;
+
+    @include media-up(md) {
+      padding-left: 32px;
+      margin: 48px 0 16px;
+      font-size: 22px;
+    }
+
+    &::before {
+      position: absolute;
+      top: 12px;
+      left: 0;
+      width: 16px;
+      height: 2px;
+      content: "";
+      background: $color-primary;
+
+      @include media-up(md) {
+        top: 14px;
+      }
+    }
+  }
+
+  h4 {
+    position: relative;
+    padding-bottom: 4px;
+    margin: 24px 0 15px;
+    font-size: 16px;
+    line-height: 1.6;
+    border-bottom: 2px solid $color-primary;
+
+    @include media-up(md) {
+      margin: 48px 0 16px;
+      font-size: 18px;
+    }
+  }
+
+  h5 {
+    margin: 15px 0 10px;
+    font-size: 15px;
+
+    @include media-up(md) {
+      font-size: 16px;
+    }
+  }
+
+  h6 {
+    margin: 15px 0 10px;
+    font-size: 14px;
+    font-weight: normal;
+  }
+
+  p {
+    margin-bottom: 0.5em;
+    line-height: 1.85;
+    letter-spacing: normal;
+
+    a {
+      color: $color-primary;
+
+      &:hover {
+        @include media-up(lg) {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  p + p {
+    margin-top: 0.5em;
+  }
+
+  img {
+    height: auto;
+    margin-bottom: 15px;
+
+    @include media-up(md) {
+      margin-bottom: 20px;
+    }
+  }
+
+  .aligncenter {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+  }
+
+  .alignright {
+    @include media-up(md) {
+      float: right;
+      margin-left: 15px;
+    }
+  }
+
+  .alignleft {
+    @include media-up(md) {
+      float: left;
+      margin-right: 15px;
+    }
+  }
+
+  ul {
+    margin: 2.5em 0 1em;
+    list-style: none;
+
+    @include media-up(md) {
+      padding-right: 36px;
+      padding-left: 36px;
+    }
+
+    > li {
+      position: relative;
+      padding-left: 1.2em;
+
+      &::before {
+        position: absolute;
+        top: 0.5em;
+        left: 0;
+        width: 8px;
+        height: 8px;
+        content: "";
+        background-color: $color-primary;
+        border-radius: 4px;
+      }
+
+      &:nth-child(n + 2) {
+        margin-top: 0.25em;
+      }
+    }
+  }
+
+  ol {
+    margin: 2.5em 0 1em;
+    counter-reset: number 0;
+
+    @include media-up(md) {
+      padding-right: 36px;
+      padding-left: 36px;
+    }
+
+    > li {
+      position: relative;
+      padding-left: 1.2em;
+
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-family: $font-sans-en;
+        color: $color-primary;
+        content: counter(number);
+        counter-increment: number 1;
+      }
+
+      &:nth-child(n + 2) {
+        margin-top: 0.25em;
+      }
+    }
+  }
+
+  blockquote {
+    padding: 16px;
+    margin: 15px 0;
+    background: $color-gray-light;
+
+    @include media-up(md) {
+      padding: 48px 64px;
+      margin: 25px 0;
+    }
+
+    @include media-up(lg) {
+      padding: 48px 64px;
+    }
+
+    p {
+      margin-bottom: 0;
+      letter-spacing: 0;
+    }
+  }
+
+  hr {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 1.2em auto;
+    border: 0;
+    border-top: 1px solid #ccc;
+  }
+
+  table {
+    margin: 15px 0;
+
+    @include media-up(md) {
+      margin: 25px 0;
+    }
+  }
+
+  table th {
+    background-color: #f8fff0;
+  }
+
+  table th,
+  table td {
+    padding: 5px 10px;
+    word-break: break-all;
+    vertical-align: top;
+    border: solid 1px #ddd;
+  }
+
+  iframe {
+    max-width: 100%;
+  }
+}
