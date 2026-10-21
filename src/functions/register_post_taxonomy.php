@@ -2,28 +2,78 @@
 
 /**
  * カスタム投稿、カスタムタクソノミーの登録
+ * 一覧は docs/project/sitemap.md の「カスタム投稿タイプ」「カスタムタクソノミー」
  *
  **/
 
-// コラム
-add_action('init', 'my_column_init');
-function my_column_init()
+/**
+ * Worksの絞り込み用タクソノミー
+ * 並び順が一覧ページのフィルターの表示順になる
+ */
+function works_taxonomies()
 {
-  register_post_type('column', array(
-    'labels' => array(
-      'name' => 'コラム',
-      'singular_name' => 'コラム',
-      'all_items' => 'コラム一覧',
-      'add_new' => 'コラム追加',
-      'add_new_item' => 'コラムの追加',
-      'edit_item' => 'コラムの編集',
-      'new_item' => 'コラム追加',
-      'view_item' => 'コラムを表示',
-      'search_items' => 'コラムを検索',
-      'not_found' =>  'コラムが見つかりません',
-      'not_found_in_trash' => 'ゴミ箱内にコラムが見つかりませんでした。',
-      'parent_item_colon' => ''
-    ),
+  return array(
+    'works_plan' => 'プラン',
+    'works_area' => 'エリア',
+    'works_guests' => '人数',
+    'works_season' => '季節',
+    'works_venue' => '会場',
+  );
+}
+
+// カスタム投稿用のラベルを生成
+function custom_post_type_labels($name)
+{
+  return array(
+    'name' => $name,
+    'singular_name' => $name,
+    'all_items' => $name . '一覧',
+    'add_new' => $name . '追加',
+    'add_new_item' => $name . 'の追加',
+    'edit_item' => $name . 'の編集',
+    'new_item' => $name . '追加',
+    'view_item' => $name . 'を表示',
+    'search_items' => $name . 'を検索',
+    'not_found' => $name . 'が見つかりません',
+    'not_found_in_trash' => 'ゴミ箱内に' . $name . 'が見つかりませんでした。',
+    'parent_item_colon' => ''
+  );
+}
+
+// (カテゴリーのような) 階層化できるタクソノミー用のラベルを生成
+function custom_taxonomy_labels($name)
+{
+  return array(
+    'name' => $name,
+    'singular_name' => $name,
+    'search_items' => $name . 'を検索',
+    'all_items' => 'すべての' . $name,
+    'parent_item' => '親' . $name,
+    'parent_item_colon' => '親' . $name . '：',
+    'edit_item' => '編集',
+    'update_item' => '更新',
+    'add_new_item' => '新規' . $name . 'を追加',
+    'new_item_name' => '名前',
+  );
+}
+
+// News
+add_action('init', 'my_news_init');
+function my_news_init()
+{
+  // /news/newscat/{term-slug}/ が News詳細（/news/{post-slug}/）のルールに先に一致しないよう、タクソノミーを先に登録する
+  register_taxonomy('newscat', array('news'), array(
+    'hierarchical' => true,
+    'labels' => custom_taxonomy_labels('カテゴリー'),
+    'show_ui' => true,
+    'show_admin_column' => true,
+    'query_var' => true,
+    'show_in_rest' => true,
+    'rewrite' => array('slug' => 'news/newscat', 'with_front' => false),
+  ));
+
+  register_post_type('news', array(
+    'labels' => custom_post_type_labels('News'),
     'public' => true,
     'publicly_queryable' => true,
     'show_ui' => true,
@@ -33,30 +83,43 @@ function my_column_init()
     'capability_type' => 'post',
     'hierarchical' => false,
     'menu_position' => 4,
-    'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
-    'rewrite' => array('slug' => 'column', 'with_front' => false)
+    'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt'),
+    'rewrite' => array('slug' => 'news', 'with_front' => false)
   ));
+}
 
-  // (カテゴリーのような) 階層化できる新規分類を追加
-  register_taxonomy('columncat', array('column'), array(
-    'hierarchical' => true,
-    'labels' => array(
-      'name' => 'カテゴリー',
-      'singular_name' => 'カテゴリー',
-      'search_items' =>  'カテゴリーを検索',
-      'all_items' => 'すべてのカテゴリー',
-      'parent_item' => '親カテゴリー',
-      'parent_item_colon' => '親カテゴリー：',
-      'edit_item' => '編集',
-      'update_item' => '更新',
-      'add_new_item' => '新規カテゴリーを追加',
-      'new_item_name' => '名前',
-    ),
+// Works
+add_action('init', 'my_works_init');
+function my_works_init()
+{
+  register_post_type('works', array(
+    'labels' => custom_post_type_labels('Works'),
+    'public' => true,
+    'publicly_queryable' => true,
     'show_ui' => true,
     'query_var' => true,
+    'has_archive' => true,
     'show_in_rest' => true,
-    'rewrite' => array('slug' => 'columncat'),
+    'capability_type' => 'post',
+    'hierarchical' => false,
+    'menu_position' => 5,
+    'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt'),
+    'rewrite' => array('slug' => 'works', 'with_front' => false)
   ));
+
+  // タームアーカイブのURLは作らず、/works/?works_area=tokyo,osaka のようにクエリパラメータで絞り込む
+  foreach (works_taxonomies() as $taxonomy => $name) {
+    register_taxonomy($taxonomy, array('works'), array(
+      'hierarchical' => true,
+      'labels' => custom_taxonomy_labels($name),
+      'public' => true,
+      'show_ui' => true,
+      'show_admin_column' => true,
+      'query_var' => true,
+      'show_in_rest' => true,
+      'rewrite' => false,
+    ));
+  }
 }
 
 /**

@@ -26,5 +26,6 @@ get_template_part('functions/custom_pagination'); // ページネーションの
 get_template_part('functions/invalid_comments'); // コメントの無効化
 get_template_part('functions/custom_visual_editor'); // ビジュアルエディタのカスタマイズ
 get_template_part('functions/register_post_taxonomy'); // カスタム投稿、タクソノミーの登録
+get_template_part('functions/custom_works_filter'); // Works一覧の絞り込み
 get_template_part('functions/register_style_script'); // CSS, Javascriptの登録
 // get_template_part('functions/register_thumbnails'); // サムネイル（アイキャッチ）画像の設定

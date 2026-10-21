@@ -44,8 +44,6 @@ function change_archive_title($title) {
     $title = single_cat_title('', false) . 'ブログ';
   } elseif (is_tag()) { /* タグアーカイブの場合 */
     $title = single_tag_title('', false);
-  } elseif (is_tax('columncat')) {
-    $title = single_term_title("", false) . 'のコラム';
   } elseif (is_tax('newscat')) {
     $title = single_term_title("", false) . 'のお知らせ';
   } elseif (is_year()) {

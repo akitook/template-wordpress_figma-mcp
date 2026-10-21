@@ -1,11 +1,11 @@
 <?php get_header(); ?>
-<main class="archive-column l-main">
+<main class="archive-news l-main">
   <div class="l-page">
     <div class="p-container--lg">
       <div class="l-page__header">
         <div class="l-page__title">
-          <div class="en"><span>COLUMN</span></div>
-          <h1 class="ja">コラム</h1>
+          <div class="en"><span>NEWS</span></div>
+          <h1 class="ja"><?php echo is_tax('newscat') ? esc_html(single_term_title('', false)) : 'お知らせ'; ?></h1>
         </div>
       </div>
       <div class="l-page__container">
@@ -13,11 +13,27 @@
           <?php get_template_part('template-parts/breadcrumb'); ?>
         </div>
         <div class="p-container">
-          <div class="archive-column__container">
+          <?php
+          // カテゴリー一覧
+          $news_categories = get_terms(array('taxonomy' => 'newscat', 'hide_empty' => false));
+          if ($news_categories && !is_wp_error($news_categories)) :
+          ?>
+            <ul class="archive-news__categories">
+              <li class="archive-news__category<?php echo is_post_type_archive('news') ? ' is-active' : ''; ?>">
+                <a href="<?php echo esc_url(get_post_type_archive_link('news')); ?>">すべて</a>
+              </li>
+              <?php foreach ($news_categories as $news_category) : ?>
+                <li class="archive-news__category<?php echo is_tax('newscat', $news_category->term_id) ? ' is-active' : ''; ?>">
+                  <a href="<?php echo esc_url(get_term_link($news_category)); ?>"><?php echo esc_html($news_category->name); ?></a>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          <?php endif; ?>
+          <div class="archive-news__container">
             <?php if (have_posts()) : ?>
-              <ul class="archive-column__list">
+              <ul class="archive-news__list">
                 <?php while (have_posts()) : the_post(); ?>
-                  <li class="archive-column__item">
+                  <li class="archive-news__item">
                     <article class="p-article-card">
                       <a href="<?php the_permalink(); ?>" class="p-article-card__inner">
                         <div class="p-article-card__thumbnail">
@@ -37,9 +53,9 @@
                 <?php endwhile; ?>
               </ul>
             <?php else : ?>
-              <div class="column-nopost">
-                <h2 class="column-nopost__title">該当する記事がありません</h2>
-                <div class="column-nopost__action c-button-wrapper">
+              <div class="news-nopost">
+                <h2 class="news-nopost__title">該当する記事がありません</h2>
+                <div class="news-nopost__action c-button-wrapper">
                   <a class="c-button" href="<?php echo home_url(); ?>">TOPに戻る</a>
                 </div>
               </div>
