@@ -24,8 +24,9 @@
     "build": "npm-run-all -p *:production",
     "clean": "rimraf ./public",
     "login:wordmove": "docker exec -w /home/wordmove -it [.envで設定したPROJECT_NAME]_wordmove /bin/bash",
-    "docker-rebuild": "docker compose build --no-cache",
-    "prestart": "docker stop $(docker ps -q) || true && docker compose up -d",
+    "wp": "docker compose run --rm wpcli wp",
+    "docker-rebuild": "docker compose build --pull --no-cache",
+    "prestart": "docker stop $(docker ps -q) || true && docker compose up -d && sh scripts/update-wordpress.sh",
     "start": "npm run watch",
     "stop": "docker compose stop"
   },

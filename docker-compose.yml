@@ -13,6 +13,22 @@ services:
     environment:
       WORDPRESS_DB_HOST: database:3306
     env_file: .env
+  # WP-CLI（npm start では起動しない。`npm run wp -- <コマンド>` で実行）
+  wpcli:
+    container_name: "${PROJECT_NAME}_wpcli"
+    image: wordpress:cli
+    # WordPressコンテナ（www-data: 33）と同じユーザーで実行し、ファイルの所有者を揃える
+    user: "33:33"
+    profiles:
+      - tools
+    depends_on:
+      - database
+    volumes:
+      - ./public:/var/www/html/
+    working_dir: /var/www/html/${WORDPRESS_DIR}
+    environment:
+      WORDPRESS_DB_HOST: database:3306
+    env_file: .env
   database:
     container_name: "${PROJECT_NAME}_db"
     platform: linux/amd64

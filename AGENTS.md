@@ -18,6 +18,7 @@ npm install       # 依存関係インストール（初回・package.json変更
 npm start         # Vite watch + scss watch + copy watch + Browsersync + Docker を並列起動
 npm stop          # npm start停止後、立ち上がったままのDockerを停止
 npm run build     # 本番用ビルドをdist/に出力
+npm run wp -- <コマンド>  # WP-CLI（固定ページ・タームの作成など。Docker起動中に使う）
 ```
 
 詳細は [README.md](./README.md) の `開発環境構築手順` / `wordmoveの利用方法` を参照。

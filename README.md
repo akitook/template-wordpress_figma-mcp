@@ -40,6 +40,7 @@ package.jsonを変更したときも.
 npm install
 ```
 開発時の基本コマンド。 Vite、Browsersync、Dockerが同時に立ち上がる。
+起動時に `scripts/update-wordpress.sh` がWP-CLIで、WordPress本体を `.env` の `WORDPRESS_CORE_VERSION` に揃える（本番環境のバージョンを指定する。空の場合は何もしない）。
 
 ```
 npm start
@@ -55,9 +56,14 @@ npm stop
 npm run build
 ```
 
-Docker内のWordPressを再インストールし直す。Dockerの起動に失敗し、壊れた際などに使用。
+Docker内のWordPressを再インストールし直す（ベースイメージも最新版を取得）。Dockerの起動に失敗し、壊れた際などに使用。
 ```
 npm run docker-rebuild
+```
+
+WP-CLIを実行（`npm start` でDockerが起動している状態で使う）。例: 固定ページ一覧
+```
+npm run wp -- post list --post_type=page
 ```
 
 wordmoveコンテナにログイン
