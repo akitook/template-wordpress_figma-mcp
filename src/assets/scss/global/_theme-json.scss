@@ -28,20 +28,22 @@ $colors: (
 // font-family（settings.typography.fontFamilies）
 $font-serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", yumincho, serif;
 $font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", meiryo, メイリオ, sans-serif;
-$font-sans-en: "Montserrat", sans-serif;
+$font-sans-en: "Afacad Flux", sans-serif;
 $font-families: (
   "serif": ("Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", yumincho, serif),
   "sans": ("Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", meiryo, メイリオ, sans-serif),
-  "sans-en": ("Montserrat", sans-serif),
+  "sans-en": ("Afacad Flux", sans-serif),
 );
 
 // font-size（settings.typography.fontSizes）
 $font-size-caption: clamp(10px, 9.0291px + 0.2589vw, 14px);
+$font-size-caption-fixed: 14px;
 $font-size-body: clamp(14px, 13.5146px + 0.1294vw, 16px);
 $font-size-title-medium: 20px;
 $font-size-title-large: clamp(20px, 19.0291px + 0.2589vw, 24px);
 $font-sizes: (
   "caption": (clamp(10px, 9.0291px + 0.2589vw, 14px)),
+  "caption-fixed": (14px),
   "body": (clamp(14px, 13.5146px + 0.1294vw, 16px)),
   "title-medium": (20px),
   "title-large": (clamp(20px, 19.0291px + 0.2589vw, 24px)),
@@ -105,6 +107,13 @@ $text-styles: (
     "font-size": (clamp(14px, 13.5146px + 0.1294vw, 16px)),
     "font-weight": 500,
     "line-height": 2,
+    "letter-spacing": 0.1em,
+  ),
+  "button-medium": (
+    "font-family": ("Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", yumincho, serif),
+    "font-size": (14px),
+    "font-weight": 500,
+    "line-height": 1.8,
     "letter-spacing": 0.1em,
   ),
 );

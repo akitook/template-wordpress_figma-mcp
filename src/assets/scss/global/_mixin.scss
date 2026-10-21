@@ -43,15 +43,42 @@
 
 // デザイン幅（$design-width-sp〜$design-width-pc）の間で $min〜$max を線形補間する
 // 例: font-size: fluid(28px, 48px);
-@function fluid($min, $max) {
-  $slope: math.div($max - $min, ($design-width-pc - $design-width-sp) * 1px);
+// 補間する画面幅を変える場合は第3・第4引数に幅（単位なし）を渡す。例: TAB〜PC間 fluid(14px, 18px, 1280, 1920)
+@function fluid(
+  $min,
+  $max,
+  $min-width: $design-width-sp,
+  $max-width: $design-width-pc
+) {
+  $slope: math.div($max - $min, ($max-width - $min-width) * 1px);
   $intercept: math.div(
-    math.round(($min - $slope * $design-width-sp * 1px) * 10000),
+    math.round(($min - $slope * $min-width * 1px) * 10000),
     10000
   );
   $preferred: math.div(math.round($slope * 100 * 10000), 10000) * 1vw;
 
   @return clamp(#{$min}, #{$intercept} + #{$preferred}, #{$max});
+}
+
+// 和紙テクスチャの背景（Figma: ricepaper を不透明度50%で敷き、その上に色を乗算）
+// 子要素より下に色を重ねるため isolation で重なり順を閉じる
+@mixin texture-background($overlay-color) {
+  position: relative;
+  background:
+    linear-gradient(rgb(255 255 255 / 50%), rgb(255 255 255 / 50%)),
+    url("../img/common/texture.png") 0 0 / 485px repeat,
+    $color-gray-0;
+  isolation: isolate;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    content: "";
+    background-color: $overlay-color;
+    mix-blend-mode: multiply;
+  }
 }
 
 // Figmaのテキストスタイル（src/theme.json の settings.custom.textStyles）を適用する

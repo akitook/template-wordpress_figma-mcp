@@ -1,0 +1,25 @@
+@use "../../global" as *;
+
+// 和紙テクスチャのボタン（Figma: メニュー・お問い合わせの「LINEで相談する」など）
+.c-paper-button {
+  @include texture-background($color-gray-50);
+  @include text-style("button-medium");
+
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  color: $color-gray-900;
+
+  @include media-up(lg) {
+    min-height: 56px;
+  }
+
+  &__icon {
+    width: 10px;
+    height: auto;
+    transform: rotate(45deg);
+  }
+}

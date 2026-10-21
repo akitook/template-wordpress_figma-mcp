@@ -1,0 +1,15 @@
+@use "../../global" as *;
+
+// 外部リンク（テキスト＋右上向きの矢印）。矢印の色はテンプレート側で画像を出し分ける
+.c-external-link {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  white-space: nowrap;
+
+  &__icon {
+    width: 8px;
+    height: auto;
+    transform: rotate(45deg);
+  }
+}

@@ -81,3 +81,8 @@ li {
   padding: 100px 0;
   text-align: center;
 }
+
+// メニューを開いている間は背面をスクロールさせない（src/assets/js/modules/menu.js）
+body.is-menu-open {
+  overflow: hidden;
+}

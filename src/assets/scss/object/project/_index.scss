@@ -5,6 +5,7 @@
 @use "./p-form";
 @use "./p-editor-content";
 @use "./p-pagination";
+@use "./p-menu";
 
 .p-container {
   @include container(md);

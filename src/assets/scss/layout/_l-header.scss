@@ -2,15 +2,27 @@
    ----------------------------------------------------------------- */
 @use "../global" as *;
 
+// Figma: header_sp（SP）/ header_pc（PC 1920、TAB 1280は2/3に縮小）
+// lg未満はSPレイアウト、lg以上はTAB〜PCの間で補間する
 .l-header {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 100;
   width: 100%;
-  background: $color-gray-0;
-  opacity: 1;
-  transition: all 0.3s ease-out;
+  transition:
+    transform 0.3s ease-out,
+    opacity 0.3s ease-out;
+
+  // 背景のぼかしは疑似要素に付ける（header自体に付けると、fixedのメニューの基準がheaderになるため）
+  &::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    content: "";
+    background-color: rgb(255 255 255 / 10%);
+    backdrop-filter: blur(2px);
+  }
 
   &.is-scroll {
     opacity: 0;
@@ -22,152 +34,91 @@
     }
   }
 
-  &.is-open {
-    position: fixed;
-    transform: translateY(0);
-
-    .l-header__nav {
-      display: block;
-      visibility: visible;
-      opacity: 1;
-
-      ul {
-        opacity: 1;
-      }
-    }
-  }
-
   &__inner {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between;
-    max-width: 1600px;
-    height: 60px;
-    padding: 0 4%;
-    margin: 0 auto;
-
-    @include media-up(sm) {
-      padding: 0 30px;
-    }
+    height: 56px;
+    padding: 0 20px;
 
     @include media-up(lg) {
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      height: 80px;
+      height: fluid(92px, 140px, 1280, 1920);
+      padding: 0 40px;
     }
   }
 
   &__logo {
-    width: 120px;
+    grid-column: 1;
+    justify-self: start;
+    width: 70px;
+    line-height: 0;
 
     @include media-up(lg) {
-      width: 180px;
+      width: fluid(117px, 188px, 1280, 1920);
     }
 
     img {
       width: 100%;
-    }
-  }
-
-  &__nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    visibility: hidden;
-    background: $color-gray-50;
-    opacity: 0;
-    transition: all 0.2s ease;
-
-    @include media-up(lg) {
-      position: static;
-      width: auto;
       height: auto;
-      margin-left: auto;
-      visibility: visible;
-      background: none;
-      opacity: 1;
-    }
-
-    ul {
-      padding: 0 8%;
-      margin-top: 40px;
-      opacity: 0;
-
-      @include media-up(lg) {
-        display: flex;
-        align-items: center;
-        padding: 0;
-        margin: 0;
-        opacity: 1;
-      }
-
-      .nav-item {
-        padding: 15px 0;
-        color: $color-gray-800;
-        list-style: none;
-        cursor: pointer;
-        border-bottom: 1px solid $color-gray-0;
-        transition: opacity 0.4s;
-
-        @include media-up(lg) {
-          padding: 0 1em;
-          font-size: 14px;
-          letter-spacing: inherit;
-        }
-
-        &:hover {
-          opacity: 0.6;
-        }
-
-        a {
-          color: $color-gray-800;
-          transition: opacity 0.4s;
-
-          &:hover {
-            opacity: 0.6;
-          }
-        }
-      }
     }
   }
 
-  &__button {
-    padding: 8px 0;
-    list-style: none;
+  &__navigation {
+    grid-column: 2;
+  }
 
-    @include media-up(lg) {
-      padding: 0 1em;
-    }
-
-    &:first-child {
-      margin-top: 32px;
-    }
+  &__navigation-list {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    grid-template-columns: repeat(3, fluid(40px, 80px, 1280, 1920)) auto;
+    grid-auto-flow: column;
+    gap: fluid(6px, 10px, 1280, 1920) fluid(100px, 155px, 1280, 1920);
+    font-family: $font-sans-en;
+    font-size: fluid(14px, 18px, 1280, 1920);
+    font-weight: 300;
+    line-height: 1.5;
+    color: $color-gray-800;
+    letter-spacing: 0.1em;
 
     a {
-      display: block;
-      padding: 6px 16px;
-      font-weight: bold;
-      color: $color-gray-800;
-      text-align: center;
-      border: 2px solid $color-gray-800;
-      border-radius: 5px;
-      transition: all 0.2s;
+      color: inherit;
+    }
+  }
 
-      &:hover {
-        color: $color-gray-0;
-        background-color: $color-gray-800;
-      }
+  &__actions {
+    display: flex;
+    grid-column: 3;
+    gap: 40px;
+    align-items: center;
+    justify-self: end;
+  }
+
+  &__line {
+    font-family: $font-sans-en;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: $color-gray-800;
+    letter-spacing: 0.1em;
+  }
+
+  &__menu-button {
+    display: block;
+    flex-shrink: 0;
+    width: 40px;
+    padding: 8px 0;
+    line-height: 0;
+    cursor: pointer;
+    background: none;
+    border: 0;
+
+    @include media-up(lg) {
+      width: fluid(46px, 56px, 1280, 1920);
     }
 
-    &--cta {
-      a {
-        color: $color-gray-0 !important;
-        background-color: $color-gray-800;
-      }
+    img {
+      width: 100%;
+      height: auto;
     }
   }
 }

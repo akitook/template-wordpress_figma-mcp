@@ -2,19 +2,187 @@
    ----------------------------------------------------------------- */
 @use "../global" as *;
 
+// Figma: contact_sp 内の footer（SP）/ footer_pc（PC 1920、TAB 1280は2/3に縮小）
+// SPは縦積み、lg以上は左（ロゴ・著作権）と右（Menu / Social media / Contact）の2カラム
 .l-footer {
-  padding: 40px 0;
-  background-color: $color-gray-400;
+  @include texture-background($color-gray-600);
 
-  @include media-up(md) {
-    padding: 80px 0;
+  font-family: $font-sans-en;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: $color-gray-50;
+  letter-spacing: 0.1em;
+
+  @include media-up(lg) {
+    font-size: fluid(14px, 18px, 1280, 1920);
   }
 
-  .l-footer__container {
-    .copyright {
-      font-size: 12px;
-      color: $color-gray-0;
-      text-align: center;
+  a {
+    color: inherit;
+  }
+
+  &__inner {
+    display: grid;
+    grid-template-areas:
+      "logo"
+      "information"
+      "legal";
+    row-gap: 86px;
+    padding: 40px 20px 28px;
+
+    @include media-up(lg) {
+      grid-template-areas:
+        "logo information"
+        "legal information";
+      grid-template-columns: 1fr fluid(427px, 640px, 1280, 1920);
+      row-gap: 0;
+      padding: fluid(37px, 56px, 1280, 1920) 40px fluid(39px, 59px, 1280, 1920);
     }
+  }
+
+  &__logo {
+    grid-area: logo;
+    align-self: start;
+    width: 100px;
+    line-height: 0;
+
+    @include media-up(lg) {
+      width: fluid(125px, 188px, 1280, 1920);
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__information {
+    display: flex;
+    flex-direction: column;
+    grid-area: information;
+    gap: 80px;
+
+    @include media-up(lg) {
+      gap: fluid(107px, 160px, 1280, 1920);
+    }
+  }
+
+  // 見出し列＋内容列。SPは内容2列、lg以上は内容3列（Menuの3グループに合わせる）
+  &__row {
+    display: grid;
+    grid-template-columns: 173px 101px 1fr;
+    align-items: start;
+
+    @include media-up(lg) {
+      grid-template-columns:
+        fluid(157px, 235px, 1280, 1920)
+        repeat(2, fluid(111px, 167px, 1280, 1920))
+        1fr;
+    }
+  }
+
+  &__label {
+    grid-row: 1 / span 2;
+    grid-column: 1;
+    color: $color-gray-400;
+
+    @include media-down(lg) {
+      line-height: 1.2;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    @include media-up(lg) {
+      gap: fluid(13px, 20px, 1280, 1920);
+    }
+
+    &--first {
+      grid-row: 1;
+      grid-column: 2;
+    }
+
+    &--plan {
+      grid-row: 2;
+      grid-column: 2;
+      margin-top: 24px;
+
+      @include media-up(lg) {
+        grid-row: 1;
+        grid-column: 3;
+        margin-top: 0;
+      }
+    }
+
+    &--last {
+      grid-row: 1 / span 2;
+      grid-column: 3;
+
+      @include media-up(lg) {
+        grid-row: 1;
+        grid-column: 4;
+      }
+    }
+  }
+
+  &__sub-item {
+    font-size: 0.875em;
+    line-height: normal;
+  }
+
+  // lg以上は Plan の列から右端まで（Figma: Instagram は Plan の列、LINE は右端）
+  &__social {
+    display: flex;
+    grid-column: 2 / -1;
+    justify-content: space-between;
+
+    @include media-up(lg) {
+      grid-column: 3 / -1;
+    }
+  }
+
+  &__contact {
+    display: flex;
+    flex-direction: column;
+    grid-column: 2 / -1;
+    gap: 20px;
+
+    @include media-up(lg) {
+      grid-column: 3 / -1;
+      gap: 8px;
+    }
+
+    > div {
+      @include media-up(lg) {
+        display: flex;
+        gap: 0.3em;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  &__legal {
+    display: flex;
+    grid-area: legal;
+    gap: 16px;
+    align-items: flex-end;
+    justify-content: space-between;
+    font-size: 12px;
+    line-height: normal;
+
+    @include media-up(lg) {
+      gap: fluid(89px, 133px, 1280, 1920);
+      align-self: end;
+      justify-content: flex-start;
+      font-size: 14px;
+    }
+  }
+
+  &__copyright {
+    font-size: inherit;
   }
 }

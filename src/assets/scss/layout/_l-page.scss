@@ -2,11 +2,12 @@
    ----------------------------------------------------------------- */
 @use "../global" as *;
 
+// 固定ヘッダーの高さ分（l-header__inner と揃える）
 .l-main {
-  padding-top: 60px;
+  padding-top: 56px;
 
   @include media-up(lg) {
-    padding-top: 80px;
+    padding-top: fluid(92px, 140px, 1280, 1920);
   }
 }
 

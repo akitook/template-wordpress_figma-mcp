@@ -28,7 +28,7 @@
   <!-- google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@300;400&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
 
   <!-- wp_head -->
   <?php wp_head(); ?>
@@ -36,30 +36,91 @@
 </head>
 
 <body <?php body_class(); ?>>
+  <?php
+  $links = site_links();
+  $contact = site_contact();
+  $logo_tag = (is_front_page() && is_home()) ? 'h1' : 'div';
+  ?>
   <header id="header" class="l-header">
     <div class="l-header__inner">
-      <?php if (is_front_page() && is_home()) : ?>
-        <h1 class="l-header__logo"><a href="<?php echo home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/logo.svg" alt="サービス名称" /></a></h1>
-      <?php else : ?>
-        <div class="l-header__logo">
-          <a href="<?php echo home_url(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/img/common/logo.svg" alt="サービス名称" /></a>
-        </div>
-      <?php endif; ?>
-      <nav class="l-header__nav">
-        <ul>
-          <li class="nav-item"><a href="<?php echo home_url('/about/'); ?>">このサイトについて</a></li>
-          <li class="nav-item"><a href="<?php echo home_url('/news/'); ?>">お知らせ</a></li>
-          <li class="nav-item"><a href="<?php echo home_url('/column/'); ?>">コラム</a></li>
-          <li class="l-header__button"><a href="<?php echo home_url('/contact/'); ?>">ご相談・お見積り</a></li>
-          <li class="l-header__button l-header__button--cta u-hide-down-lg"><a href="<?php echo home_url('/'); ?>">資料ダウンロード</a></li>
+      <<?php echo $logo_tag; ?> class="l-header__logo">
+        <a href="<?php echo esc_url($links['top']); ?>">
+          <img src="<?php echo theme_image_url('common/logo.svg'); ?>" alt="<?php echo esc_attr($contact['name']); ?>" width="188" height="64">
+        </a>
+      </<?php echo $logo_tag; ?>>
+      <nav class="l-header__navigation u-hide-down-lg" aria-label="グローバルナビゲーション">
+        <ul class="l-header__navigation-list">
+          <li><a href="<?php echo esc_url($links['top']); ?>">Top</a></li>
+          <li><a href="<?php echo esc_url($links['about']); ?>">About</a></li>
+          <li><a href="<?php echo esc_url($links['plan']); ?>">Plan</a></li>
+          <li><a href="<?php echo esc_url($links['works']); ?>">Works</a></li>
+          <li><a href="<?php echo esc_url($links['news']); ?>">News</a></li>
+          <li><a href="<?php echo esc_url($links['faq']); ?>">FAQ</a></li>
+          <li><a href="<?php echo esc_url($links['contact']); ?>">Contact</a></li>
+          <li>
+            <a class="c-external-link" href="<?php echo esc_url($links['instagram']); ?>" target="_blank" rel="noopener">
+              Instagram<img class="c-external-link__icon" src="<?php echo theme_image_url('common/icon-arrow.svg'); ?>" alt="" width="9" height="11">
+            </a>
+          </li>
         </ul>
       </nav>
-      <div class="l-header__menu c-menu-icon js-drawer">
-        <div class="c-menu-icon__wrap">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+      <div class="l-header__actions">
+        <a class="l-header__line c-external-link u-hide-up-lg" href="<?php echo esc_url($links['line']); ?>" target="_blank" rel="noopener">
+          Contact on LINE<img class="c-external-link__icon" src="<?php echo theme_image_url('common/icon-arrow.svg'); ?>" alt="" width="9" height="11">
+        </a>
+        <button class="l-header__menu-button js-menu-toggle" type="button" aria-controls="menu" aria-expanded="false" aria-label="メニューを開く">
+          <img class="u-hide-down-lg" src="<?php echo theme_image_url('common/icon-menu-open.svg'); ?>" alt="" width="56" height="9">
+          <img class="u-hide-up-lg" src="<?php echo theme_image_url('common/icon-menu-open-small.svg'); ?>" alt="" width="40" height="7">
+        </button>
       </div>
     </div>
   </header>
+
+  <?php // メニュー展開時（Figma: TOP_Menu展開時_PC / TOP_Menu_SP） ?>
+  <div id="menu" class="p-menu" aria-hidden="true">
+    <div class="p-menu__panel">
+      <div class="p-menu__header">
+        <a class="p-menu__logo" href="<?php echo esc_url($links['top']); ?>">
+          <img src="<?php echo theme_image_url('common/logo-white.svg'); ?>" alt="<?php echo esc_attr($contact['name']); ?>" width="188" height="64">
+        </a>
+        <button class="p-menu__close js-menu-toggle" type="button" aria-controls="menu" aria-label="メニューを閉じる">
+          Close<img src="<?php echo theme_image_url('common/icon-menu-close.svg'); ?>" alt="" width="40" height="1">
+        </button>
+      </div>
+      <div class="p-menu__body">
+        <div class="p-menu__row">
+          <p class="p-menu__label">Menu</p>
+          <div class="p-menu__links">
+            <ul class="p-menu__list">
+              <li><a href="<?php echo esc_url($links['top']); ?>">Top</a></li>
+              <li><a href="<?php echo esc_url($links['about']); ?>">About</a></li>
+              <li><a href="<?php echo esc_url($links['works']); ?>">Works</a></li>
+              <li><a href="<?php echo esc_url($links['news']); ?>">News</a></li>
+              <li><a href="<?php echo esc_url($links['faq']); ?>">FAQ</a></li>
+            </ul>
+            <ul class="p-menu__list">
+              <li><a href="<?php echo esc_url($links['plan']); ?>">Plan</a></li>
+              <li class="p-menu__sub-item"><a href="<?php echo esc_url($links['muni']); ?>">-&nbsp;&nbsp;Muni</a></li>
+              <li class="p-menu__sub-item"><a href="<?php echo esc_url($links['awai']); ?>">-&nbsp;&nbsp;Awai</a></li>
+              <li class="p-menu__sub-item"><a href="<?php echo esc_url($links['utsushiki']); ?>">-&nbsp;&nbsp;Utsushiki</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-menu__row">
+          <p class="p-menu__label">Social media</p>
+          <a class="c-external-link" href="<?php echo esc_url($links['instagram']); ?>" target="_blank" rel="noopener">
+            Instagram<img class="c-external-link__icon" src="<?php echo theme_image_url('common/icon-arrow-white.svg'); ?>" alt="" width="9" height="11">
+          </a>
+        </div>
+        <div class="p-menu__row p-menu__row--vertical">
+          <p class="p-menu__label">Contact</p>
+          <div class="p-menu__buttons">
+            <a class="c-paper-button" href="<?php echo esc_url($links['line']); ?>" target="_blank" rel="noopener">
+              気軽にLINEで相談する<img class="c-paper-button__icon" src="<?php echo theme_image_url('common/icon-arrow-button.svg'); ?>" alt="" width="11" height="13">
+            </a>
+            <a class="c-paper-button" href="<?php echo esc_url($links['contact']); ?>">じっくりメールで相談する</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

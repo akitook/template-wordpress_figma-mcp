@@ -118,27 +118,27 @@ FigmaのURLは制作途中で追加・差し替えが頻繁に起こる。sitema
 
 ガイドの「既存テンプレートを優先する」は、このテンプレートでは次を指す。
 
-| 種類           | 既存の部品                                                                                                                        |
-| -------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| Layout         | `l-header`, `l-footer`, `l-page`, `l-main`                                                                                        |
-| Component      | `c-button`（`--small`/`--large`/`--outlined`/`--rounded`）, `c-button-wrapper`, `c-input`, `c-select`, `c-radio`, `c-menu-icon`   |
-| Project        | `p-container`（`--sm`/`--lg`）, `p-section-title`, `p-article-card`, `p-breadcrumb`, `p-pagination`, `p-form`, `p-editor-content` |
-| Utility        | `u-hide-up-{xs,sm,md,lg,xl}`, `u-hide-down-{xs,sm,md,lg,xl}`                                                                      |
-| template-parts | `page-header.php`, `breadcrumb.php`                                                                                               |
-| Mixin / 関数   | `container()`, `media-up()`, `media-down()`, `hover()`, `fluid()`                                                                 |
+| 種類                 | 既存の部品                                                                                                                                                                                      |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Layout               | `l-header`, `l-footer`, `l-page`, `l-main`                                                                                                                                                      |
+| Component            | `c-button`（`--small`/`--large`/`--outlined`/`--rounded`）, `c-button-wrapper`, `c-input`, `c-select`, `c-radio`, `c-external-link`（テキスト＋↗）, `c-paper-button`（和紙テクスチャのボタン） |
+| Project              | `p-container`（`--sm`/`--lg`）, `p-section-title`, `p-article-card`, `p-breadcrumb`, `p-pagination`, `p-form`, `p-editor-content`, `p-menu`（メニュー展開時）                                   |
+| Utility              | `u-hide-up-{xs,sm,md,lg,xl}`, `u-hide-down-{xs,sm,md,lg,xl}`                                                                                                                                    |
+| template-parts / PHP | `page-header.php`, `breadcrumb.php`、リンク・連絡先は `site_links()` / `site_contact()`、テーマ画像のURLは `theme_image_url()`（`functions/custom_site_links.php`）                             |
+| Mixin / 関数         | `container()`, `media-up()`, `media-down()`, `hover()`, `fluid()`, `text-style()`, `texture-background()`（和紙テクスチャ＋色の乗算）                                                           |
 
 ## 差分の種類と実装方針（このテンプレートでの書き方）
 
 ガイドの「差分の種類 → 実装方針」表を、このテンプレートでは次のように書く。モバイルファースト（`media-up` で上書き）が基本。
 
-| 差分の種類                 | 書き方                                                                                          |
-| -------------------------- | ----------------------------------------------------------------------------------------------- |
-| 数値の差（フォント・余白） | `font-size: fluid(28px, 48px);` のように `fluid(SPの値, PCの値)` を使う。clamp() を手書きしない |
-| カラム数の変化             | `display: grid` をベースに `@include media-up(md)` で `grid-template-columns` を切替            |
-| 並び順が変わる             | `order` または `grid-template-areas` を `media-up` 内で切替                                     |
-| 片方にしかない要素         | `u-hide-up-md`（SPのみ表示）/ `u-hide-down-md`（PCのみ表示）                                    |
-| 画像の切り抜きが違う       | `<picture>` + `<source media="(min-width: 768px)">`、または `object-position`                   |
-| デザインにない中間幅       | まず `fluid()` の補間で対応し、崩れる箇所だけ `media-up(md)` 等を追加                           |
+| 差分の種類                 | 書き方                                                                                                                                                                                                        |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 数値の差（フォント・余白） | `font-size: fluid(28px, 48px);` のように `fluid(SPの値, PCの値)` を使う。clamp() を手書きしない。TABがPCの縮小版の場合は `fluid(TABの値, PCの値, 1280, 1920)` のように補間範囲を渡し、`media-up(lg)` 内で使う |
+| カラム数の変化             | `display: grid` をベースに `@include media-up(md)` で `grid-template-columns` を切替                                                                                                                          |
+| 並び順が変わる             | `order` または `grid-template-areas` を `media-up` 内で切替                                                                                                                                                   |
+| 片方にしかない要素         | `u-hide-up-md`（SPのみ表示）/ `u-hide-down-md`（PCのみ表示）                                                                                                                                                  |
+| 画像の切り抜きが違う       | `<picture>` + `<source media="(min-width: 768px)">`、または `object-position`                                                                                                                                 |
+| デザインにない中間幅       | まず `fluid()` の補間で対応し、崩れる箇所だけ `media-up(md)` 等を追加                                                                                                                                         |
 
 - ブレークポイントは `global/_variable.scss` の `$breakpoint-up` / `$breakpoint-down`（xs 425 / sm 554 / md 768 / lg 992 / xl 1200）。
 - 横幅の制御は `container()` mixin か `p-container` を使い、`position: absolute` でレイアウトを再現しない（装飾の重ね合わせのみ可）。
