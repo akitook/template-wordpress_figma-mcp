@@ -3,7 +3,7 @@
 .page-front {
   .mainview {
     padding: 64px 0;
-    background-color: $color-gray-ultralight;
+    background-color: $color-gray-50;
 
     @include media-up(lg) {
       padding: 80px 0;
@@ -28,7 +28,7 @@
       .mainview-title__en {
         font-family: $font-sans-en;
         font-size: 1.5vw;
-        color: $color-gray;
+        color: $color-gray-600;
 
         @include media-up(md) {
           font-size: 16px;

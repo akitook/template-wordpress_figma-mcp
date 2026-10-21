@@ -3,7 +3,7 @@
 .p-form {
   max-width: 840px;
   margin: 0 auto;
-  border-top: 2px solid $color-gray-light;
+  border-top: 2px solid $color-gray-200;
 
   /**
   * error message
@@ -25,7 +25,7 @@
 }
 
 .p-form__group + .p-form__group {
-  border-top: 2px solid $color-gray-light;
+  border-top: 2px solid $color-gray-200;
 }
 
 .p-form__row {
@@ -85,7 +85,7 @@
         display: block;
         font-size: 12px;
         font-weight: normal;
-        color: $color-gray;
+        color: $color-gray-600;
 
         @include media-up(lg) {
           font-size: 13px;
@@ -100,10 +100,10 @@
       padding: 0 6px;
       font-size: 10px;
       line-height: 18px;
-      color: $color-white;
+      color: $color-gray-0;
       text-align: center;
       letter-spacing: 0.1em;
-      background-color: $color-gray;
+      background-color: $color-gray-600;
       border-radius: 2px;
 
       @include media-up(md) {
@@ -115,8 +115,8 @@
     }
 
     > .tag--required {
-      color: $color-white;
-      background-color: $color-primary-light;
+      color: $color-gray-0;
+      background-color: $color-gray-400;
     }
   }
 
@@ -171,7 +171,7 @@
     padding: 12px;
     font-size: 14px;
     vertical-align: middle;
-    background-color: $color-primary-background;
+    background-color: $color-gray-50;
     transition: border 0.2s ease-out;
 
     @include media-up(md) {
@@ -179,13 +179,13 @@
     }
 
     &::placeholder {
-      color: rgba($color-gray, 0.4);
+      color: rgba($color-gray-600, 0.4);
     }
 
     &:focus {
-      border-color: $color-primary;
+      border-color: $color-gray-800;
       outline: 0;
-      box-shadow: rgba($color-primary, 0.5) 0 0 5px 2px;
+      box-shadow: rgba($color-gray-800, 0.5) 0 0 5px 2px;
     }
   }
 
@@ -194,7 +194,7 @@
     padding: 12px;
     font-size: 12px;
     vertical-align: middle;
-    background-color: $color-primary-background;
+    background-color: $color-gray-50;
     transition: border 0.2s ease-out;
 
     @include media-up(md) {
@@ -203,19 +203,19 @@
     }
 
     &::placeholder {
-      color: $color-gray;
+      color: $color-gray-600;
     }
 
     &:focus {
-      border-color: $color-primary;
+      border-color: $color-gray-800;
       outline: 0;
-      box-shadow: rgba($color-primary, 0.5) 0 0 5px 2px;
+      box-shadow: rgba($color-gray-800, 0.5) 0 0 5px 2px;
     }
   }
 
   > p {
     margin-top: 4px;
-    color: $color-gray;
+    color: $color-gray-600;
   }
 
   &--zip {

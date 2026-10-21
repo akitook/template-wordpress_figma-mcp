@@ -1,5 +1,5 @@
 // color / font-family / font-size / spacing / デザイン幅 は src/theme.json が正
-// scripts/theme-json.js が _theme-json.scss に変換する（$color-primary, $font-sans など）
+// scripts/theme-json.js が _theme-json.scss に変換する（$color-gray-800, $font-sans など）
 @forward "theme-json";
 
 // breakpoints bootstrapと共通

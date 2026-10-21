@@ -32,7 +32,7 @@
   .p-section-title__ja {
     font-size: 12px;
     font-weight: normal;
-    color: $color-gray;
+    color: $color-gray-600;
 
     @include media-up(lg) {
       font-size: 14px;
@@ -43,15 +43,15 @@
 .p-breadcrumb {
   margin: 0 -8px;
   font-size: 13px;
-  color: $color-gray;
+  color: $color-gray-600;
 
   a {
     margin: 0 8px;
-    color: $color-gray;
+    color: $color-gray-600;
   }
 
   .breadcrumb_last {
     margin: 0 8px;
-    color: $color-primary;
+    color: $color-gray-800;
   }
 }

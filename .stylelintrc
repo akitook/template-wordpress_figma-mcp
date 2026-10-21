@@ -21,7 +21,11 @@
           "selector-class-pattern",
           "use",
           "forward",
-          "container"
+          "container",
+          "if",
+          "else",
+          "each",
+          "error"
         ]
       }
     ],

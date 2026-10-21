@@ -6,7 +6,6 @@ const postcss = require("postcss");
 const autoprefixer = require("autoprefixer");
 const fs = require("fs");
 const path = require("path");
-const themeJson = require("./theme-json");
 
 const isWatch = process.argv.includes("--watch");
 const isProduction = process.argv.includes("--production");
@@ -28,7 +27,9 @@ const outputFile = path.resolve(`${outputPath}/assets/css/main.css`);
 async function compile() {
   try {
     // theme.json → _theme-json.scss を先に生成
-    themeJson.generate();
+    // watch中に scripts/theme-json.js を変更しても反映されるよう、毎回読み込み直す
+    delete require.cache[require.resolve("./theme-json")];
+    require("./theme-json").generate();
     const result = sass.compile(inputFile, {
       style: isProduction ? "compressed" : "expanded",
       loadPaths: ["node_modules"],

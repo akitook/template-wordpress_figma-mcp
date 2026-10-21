@@ -18,7 +18,7 @@
     margin: 24px 0 15px;
     font-size: 18px;
     line-height: 1.25;
-    border-left: 4px solid $color-primary;
+    border-left: 4px solid $color-gray-800;
 
     @include media-up(md) {
       padding: 0 15px;
@@ -48,7 +48,7 @@
       width: 16px;
       height: 2px;
       content: "";
-      background: $color-primary;
+      background: $color-gray-800;
 
       @include media-up(md) {
         top: 14px;
@@ -62,7 +62,7 @@
     margin: 24px 0 15px;
     font-size: 16px;
     line-height: 1.6;
-    border-bottom: 2px solid $color-primary;
+    border-bottom: 2px solid $color-gray-800;
 
     @include media-up(md) {
       margin: 48px 0 16px;
@@ -91,7 +91,7 @@
     letter-spacing: normal;
 
     a {
-      color: $color-primary;
+      color: $color-gray-800;
 
       &:hover {
         @include media-up(lg) {
@@ -154,7 +154,7 @@
         width: 8px;
         height: 8px;
         content: "";
-        background-color: $color-primary;
+        background-color: $color-gray-800;
         border-radius: 4px;
       }
 
@@ -182,7 +182,7 @@
         top: 0;
         left: 0;
         font-family: $font-sans-en;
-        color: $color-primary;
+        color: $color-gray-800;
         content: counter(number);
         counter-increment: number 1;
       }
@@ -196,7 +196,7 @@
   blockquote {
     padding: 16px;
     margin: 15px 0;
-    background: $color-gray-light;
+    background: $color-gray-200;
 
     @include media-up(md) {
       padding: 48px 64px;

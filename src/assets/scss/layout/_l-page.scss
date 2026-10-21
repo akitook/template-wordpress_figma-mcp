@@ -13,7 +13,7 @@
 .l-page {
   padding-top: 40px;
   padding-bottom: 40px;
-  background: $color-primary-background;
+  background: $color-gray-50;
 
   @include media-up(lg) {
     padding-top: 80px;
@@ -23,7 +23,7 @@
   .l-page__container {
     padding-bottom: 32px;
     margin-top: 36px;
-    background: $color-white;
+    background: $color-gray-0;
 
     @include media-up(lg) {
       padding-bottom: 128px;
@@ -45,7 +45,7 @@
       font-size: 12px;
       font-weight: bold;
       line-height: 1;
-      color: $color-primary;
+      color: $color-gray-800;
       text-transform: uppercase;
       letter-spacing: 0.075em;
 

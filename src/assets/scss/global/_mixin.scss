@@ -3,6 +3,7 @@
 @use "variable" as *;
 @use "sass:math";
 @use "sass:map";
+@use "sass:meta";
 
 @mixin media-up($breakpoint: md) {
   @media #{map.get($breakpoint-up, $breakpoint)} {
@@ -51,4 +52,31 @@
   $preferred: math.div(math.round($slope * 100 * 10000), 10000) * 1vw;
 
   @return clamp(#{$min}, #{$intercept} + #{$preferred}, #{$max});
+}
+
+// Figmaのテキストスタイル（src/theme.json の settings.custom.textStyles）を適用する
+// 例: @include text-style("title-large");
+@mixin text-style($name) {
+  $style: map.get($text-styles, $name);
+
+  @if not $style {
+    @error "text-style: #{$name} は src/theme.json の settings.custom.textStyles に未定義です";
+  }
+
+  // SP/PCで値が変わるプロパティ（{ "sp": .., "pc": .. }）は、SPの値を先に出してから media-up(md) でまとめて上書きする
+  @each $property, $value in $style {
+    @if meta.type-of($value) == "map" {
+      #{$property}: map.get($value, "sp");
+    } @else {
+      #{$property}: $value;
+    }
+  }
+
+  @include media-up(md) {
+    @each $property, $value in $style {
+      @if meta.type-of($value) == "map" {
+        #{$property}: map.get($value, "pc");
+      }
+    }
+  }
 }

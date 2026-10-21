@@ -5,62 +5,46 @@
 
 // デザイン幅（settings.typography.fluid の min/maxViewportWidth）
 $design-width-sp: 375;
-$design-width-pc: 1440;
+$design-width-pc: 1920;
 
 // color（settings.color.palette）
-$color-white: #fff;
-$color-black: #000;
-$color-gray: #657786;
-$color-gray-light: #e1e8ed;
-$color-gray-ultralight: #f7f7f7;
-$color-pink: #ed3e73;
-$color-red: #f25f6d;
-$color-yellow: #fad508;
-$color-orange: #f7a61e;
-$color-primary: #0016ff;
-$color-primary-dark: #0016ff;
-$color-primary-light: #4051ff;
-$color-primary-ultralight: #f8fafe;
-$color-primary-background: #f0f1f7;
+$color-gray-0: #ffffff;
+$color-gray-50: #f9f9f9;
+$color-gray-200: #dddddd;
+$color-gray-400: #999999;
+$color-gray-600: #666666;
+$color-gray-800: #333333;
+$color-gray-900: #222222;
 $colors: (
-  "white": (#fff),
-  "black": (#000),
-  "gray": (#657786),
-  "gray-light": (#e1e8ed),
-  "gray-ultralight": (#f7f7f7),
-  "pink": (#ed3e73),
-  "red": (#f25f6d),
-  "yellow": (#fad508),
-  "orange": (#f7a61e),
-  "primary": (#0016ff),
-  "primary-dark": (#0016ff),
-  "primary-light": (#4051ff),
-  "primary-ultralight": (#f8fafe),
-  "primary-background": (#f0f1f7),
+  "gray-0": (#ffffff),
+  "gray-50": (#f9f9f9),
+  "gray-200": (#dddddd),
+  "gray-400": (#999999),
+  "gray-600": (#666666),
+  "gray-800": (#333333),
+  "gray-900": (#222222),
 );
 
 // font-family（settings.typography.fontFamilies）
+$font-serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", yumincho, serif;
 $font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", meiryo, メイリオ, sans-serif;
-$font-serif: georgia, 游明朝, "Yu Mincho", yumincho, "Hiragino Mincho ProN", hgs明朝e, メイリオ, meiryo, serif;
 $font-sans-en: "Montserrat", sans-serif;
 $font-families: (
+  "serif": ("Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", yumincho, serif),
   "sans": ("Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", meiryo, メイリオ, sans-serif),
-  "serif": (georgia, 游明朝, "Yu Mincho", yumincho, "Hiragino Mincho ProN", hgs明朝e, メイリオ, meiryo, serif),
   "sans-en": ("Montserrat", sans-serif),
 );
 
 // font-size（settings.typography.fontSizes）
-$font-size-small: 12px;
-$font-size-medium: 14px;
-$font-size-large: clamp(16px, 14.5915px + 0.3756vw, 20px);
-$font-size-x-large: clamp(22px, 19.8873px + 0.5634vw, 28px);
-$font-size-xx-large: clamp(28px, 23.7746px + 1.1268vw, 40px);
+$font-size-caption: clamp(10px, 9.0291px + 0.2589vw, 14px);
+$font-size-body: clamp(14px, 13.5146px + 0.1294vw, 16px);
+$font-size-title-medium: 20px;
+$font-size-title-large: clamp(20px, 19.0291px + 0.2589vw, 24px);
 $font-sizes: (
-  "small": (12px),
-  "medium": (14px),
-  "large": (clamp(16px, 14.5915px + 0.3756vw, 20px)),
-  "x-large": (clamp(22px, 19.8873px + 0.5634vw, 28px)),
-  "xx-large": (clamp(28px, 23.7746px + 1.1268vw, 40px)),
+  "caption": (clamp(10px, 9.0291px + 0.2589vw, 14px)),
+  "body": (clamp(14px, 13.5146px + 0.1294vw, 16px)),
+  "title-medium": (20px),
+  "title-large": (clamp(20px, 19.0291px + 0.2589vw, 24px)),
 );
 
 // spacing（settings.spacing.spacingSizes）
@@ -78,3 +62,49 @@ $spacing-sizes: (
 // layout（settings.layout）
 $content-size: 880px;
 $wide-size: 1280px;
+
+// text-style（settings.custom.textStyles）。@include text-style("title-large") で使う
+$text-styles: (
+  "title-large": (
+    "font-family": ("Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", yumincho, serif),
+    "font-size": (clamp(20px, 19.0291px + 0.2589vw, 24px)),
+    "font-weight": 300,
+    "line-height": 2,
+    "letter-spacing": 0.2em,
+  ),
+  "title-medium": (
+    "font-family": ("Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", yumincho, serif),
+    "font-size": (20px),
+    "font-weight": 300,
+    "line-height": 2,
+    "letter-spacing": 0.1em,
+  ),
+  "body-large": (
+    "font-family": ("Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", yumincho, serif),
+    "font-size": (clamp(14px, 13.5146px + 0.1294vw, 16px)),
+    "font-weight": 300,
+    "line-height": 2.4,
+    "letter-spacing": 0.1em,
+  ),
+  "body-light": (
+    "font-family": ("Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", yumincho, serif),
+    "font-size": (clamp(14px, 13.5146px + 0.1294vw, 16px)),
+    "font-weight": 300,
+    "line-height": ("sp": 1.6, "pc": 1.8),
+    "letter-spacing": 0.1em,
+  ),
+  "caption-medium": (
+    "font-family": ("Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", yumincho, serif),
+    "font-size": (clamp(10px, 9.0291px + 0.2589vw, 14px)),
+    "font-weight": 300,
+    "line-height": ("sp": 2, "pc": 1.8),
+    "letter-spacing": 0.1em,
+  ),
+  "button": (
+    "font-family": ("Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", yumincho, serif),
+    "font-size": (clamp(14px, 13.5146px + 0.1294vw, 16px)),
+    "font-weight": 500,
+    "line-height": 2,
+    "letter-spacing": 0.1em,
+  ),
+);

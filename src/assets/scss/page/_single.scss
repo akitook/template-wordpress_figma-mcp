@@ -11,7 +11,7 @@
     .article__header {
       .date {
         font-size: 13px;
-        color: $color-gray;
+        color: $color-gray-600;
 
         @include media-up(lg) {
           font-size: 14px;
@@ -39,7 +39,7 @@
 
         a {
           font-size: 12px;
-          color: $color-primary;
+          color: $color-gray-800;
 
           @include media-up(lg) {
             font-size: 13px;

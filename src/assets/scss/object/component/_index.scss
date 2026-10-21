@@ -25,7 +25,7 @@
       left: 0;
       width: 100%;
       height: 1px;
-      background-color: $color-primary;
+      background-color: $color-gray-800;
       transition: 0.2s ease-out;
     }
 
@@ -45,7 +45,7 @@
   &.is-open {
     .c-menu-icon__wrap {
       > span {
-        background-color: $color-primary;
+        background-color: $color-gray-800;
       }
 
       > span:nth-child(1) {
@@ -70,7 +70,7 @@
     padding-bottom: 8px;
     font-size: 12px;
     line-height: 1;
-    color: $color-gray;
+    color: $color-gray-600;
 
     @include media-up(md) {
       font-size: 14px;
@@ -93,8 +93,8 @@
     width: 6px;
     height: 6px;
     content: "";
-    border-top: solid 1px $color-primary;
-    border-right: solid 1px $color-primary;
+    border-top: solid 1px $color-gray-800;
+    border-right: solid 1px $color-gray-800;
     transform: rotate(135deg);
 
     @include media-up(md) {
@@ -112,7 +112,7 @@
     padding: 12px;
     vertical-align: middle;
     appearance: none;
-    background: $color-primary-background;
+    background: $color-gray-50;
     border-radius: 4px;
 
     @include media-up(md) {
@@ -125,7 +125,7 @@
 
     &:focus {
       outline: 0;
-      box-shadow: rgba($color-primary, 0.5) 0 0 5px 2px;
+      box-shadow: rgba($color-gray-800, 0.5) 0 0 5px 2px;
     }
   }
 }
@@ -160,8 +160,8 @@
         vertical-align: top;
         cursor: pointer;
         content: "";
-        background: $color-primary-background;
-        border: 1px solid $color-primary-background;
+        background: $color-gray-50;
+        border: 1px solid $color-gray-50;
         border-radius: 100%;
       }
     }
@@ -170,7 +170,7 @@
       + .text,
       + .mwform-radio-field-text {
         &::before {
-          border-color: $color-primary-background;
+          border-color: $color-gray-50;
           outline: none;
         }
       }
@@ -180,8 +180,8 @@
       + .text,
       + .mwform-radio-field-text {
         &::before {
-          background: $color-gray;
-          border-color: $color-gray;
+          background: $color-gray-600;
+          border-color: $color-gray-600;
         }
       }
     }
@@ -196,7 +196,7 @@
           width: 12px;
           height: 12px;
           content: "";
-          background-color: $color-black;
+          background-color: $color-gray-900;
           border-radius: 50%;
           transform: translateY(-40%);
         }

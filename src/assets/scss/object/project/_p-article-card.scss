@@ -5,7 +5,7 @@
   height: 100%;
 
   @include media-up(md) {
-    box-shadow: 0 0 24px rgba($color-black, 0.1);
+    box-shadow: 0 0 24px rgba($color-gray-900, 0.1);
     transition: box-shadow 0.2s;
   }
 
@@ -79,11 +79,11 @@
 
   &:hover {
     @include media-up(md) {
-      box-shadow: 0 0 64px rgba($color-black, 0.1);
+      box-shadow: 0 0 64px rgba($color-gray-900, 0.1);
     }
 
     .p-article-card__title {
-      color: $color-primary;
+      color: $color-gray-800;
     }
   }
 }

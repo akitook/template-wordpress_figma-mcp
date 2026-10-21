@@ -23,9 +23,9 @@
       justify-content: center;
       width: 32px;
       height: 32px;
-      color: $color-gray;
+      color: $color-gray-600;
       letter-spacing: 0;
-      background-color: $color-white;
+      background-color: $color-gray-0;
       border-radius: 16px;
       transition: all 0.2s;
 
@@ -37,16 +37,16 @@
       }
 
       &:hover {
-        color: $color-white;
-        background-color: $color-primary;
+        color: $color-gray-0;
+        background-color: $color-gray-800;
       }
 
       &.current {
-        background-color: $color-gray-light;
+        background-color: $color-gray-200;
 
         &:hover {
-          color: $color-white;
-          background-color: $color-primary;
+          color: $color-gray-0;
+          background-color: $color-gray-800;
         }
       }
 
@@ -58,7 +58,7 @@
         font-family: $font-sans;
         font-size: 13px;
         font-weight: 500;
-        background-color: $color-gray-light;
+        background-color: $color-gray-200;
 
         &::after {
           position: absolute;
@@ -67,17 +67,17 @@
           width: 8px;
           height: 8px;
           content: "";
-          border-right: 2px solid $color-primary;
-          border-bottom: 2px solid $color-primary;
+          border-right: 2px solid $color-gray-800;
+          border-bottom: 2px solid $color-gray-800;
           transform: rotate(-45deg);
         }
 
         &:hover {
-          color: $color-white;
-          background-color: $color-primary;
+          color: $color-gray-0;
+          background-color: $color-gray-800;
 
           &::after {
-            border-color: $color-white;
+            border-color: $color-gray-0;
           }
         }
       }

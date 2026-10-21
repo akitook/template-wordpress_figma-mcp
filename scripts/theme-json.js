@@ -41,6 +41,41 @@ function variableBlock(prefix, mapName, entries) {
   return `${variables}\n$${mapName}: (\n${mapItems}\n);\n`;
 }
 
+// fontSize → font-size
+function toKebabCase(value) {
+  return value.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
+}
+
+// settings.custom.textStyles → $text-styles マップ
+// fontFamily / fontSize はスラッグで指定し、生成済みの値に置き換える
+// { "sp": .., "pc": .. } の値は text-style mixin でブレークポイントにより切り替える
+function textStylesBlock(textStyles, fontFamilies, fontSizes) {
+  const presets = {
+    fontFamily: Object.fromEntries(fontFamilies),
+    fontSize: Object.fromEntries(fontSizes),
+  };
+  const resolve = (property, value) => {
+    if (!presets[property]) {
+      return value;
+    }
+    if (!(value in presets[property])) {
+      throw new Error(`textStyles: ${property} "${value}" が未定義です`);
+    }
+    return `(${presets[property][value]})`;
+  };
+  const styles = Object.entries(textStyles).map(([name, style]) => {
+    const properties = Object.entries(style).map(([property, value]) => {
+      const sassValue =
+        value && typeof value === "object"
+          ? `("sp": ${resolve(property, value.sp)}, "pc": ${resolve(property, value.pc)})`
+          : resolve(property, value);
+      return `    "${toKebabCase(property)}": ${sassValue},`;
+    });
+    return `  "${name}": (\n${properties.join("\n")}\n  ),`;
+  });
+  return `$text-styles: (\n${styles.join("\n")}\n);\n`;
+}
+
 function generate() {
   const themeJson = JSON.parse(fs.readFileSync(inputFile, "utf8"));
   const settings = themeJson.settings || {};
@@ -77,6 +112,8 @@ function generate() {
     item.size,
   ]);
 
+  const textStyles = settings.custom?.textStyles || {};
+
   const layout = settings.layout || {};
   const layoutBlock = [
     layout.contentSize && `$content-size: ${layout.contentSize};`,
@@ -106,6 +143,8 @@ function generate() {
     "// layout（settings.layout）",
     layoutBlock,
     "",
+    '// text-style（settings.custom.textStyles）。@include text-style("title-large") で使う',
+    textStylesBlock(textStyles, fontFamilies, fontSizes),
   ].join("\n");
 
   // 内容が変わらない場合は書き込まない（watchの無限ループ防止）

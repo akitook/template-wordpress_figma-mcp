@@ -85,15 +85,17 @@ FigmaのURLは制作途中で追加・差し替えが頻繁に起こる。sitema
 1. 対象フレームで `get_variable_defs` を実行し、変数（色・フォント等）を取得する。変数が取れない場合は `get_design_context` / スクショの値から拾う。
 2. `src/theme.json` に追加・更新する。
 
-   | Figmaの値          | theme.json の場所                        | SCSSで使う変数                                 |
-   | ------------------ | ---------------------------------------- | ---------------------------------------------- |
-   | 色                 | `settings.color.palette`                 | `$color-{slug}` / `map.get($colors, "{slug}")` |
-   | フォントファミリー | `settings.typography.fontFamilies`       | `$font-{slug}`                                 |
-   | フォントサイズ     | `settings.typography.fontSizes`          | `$font-size-{slug}`                            |
-   | 余白               | `settings.spacing.spacingSizes`          | `$spacing-{slug}`                              |
-   | コンテンツ幅       | `settings.layout.contentSize / wideSize` | `$content-size` / `$wide-size`                 |
+   | Figmaの値                                            | theme.json の場所                        | SCSSで使う変数                                 |
+   | ---------------------------------------------------- | ---------------------------------------- | ---------------------------------------------- |
+   | 色                                                   | `settings.color.palette`                 | `$color-{slug}` / `map.get($colors, "{slug}")` |
+   | フォントファミリー                                   | `settings.typography.fontFamilies`       | `$font-{slug}`                                 |
+   | フォントサイズ                                       | `settings.typography.fontSizes`          | `$font-size-{slug}`                            |
+   | 余白                                                 | `settings.spacing.spacingSizes`          | `$spacing-{slug}`                              |
+   | コンテンツ幅                                         | `settings.layout.contentSize / wideSize` | `$content-size` / `$wide-size`                 |
+   | テキストスタイル（サイズ・行間・字間・太さのセット） | `settings.custom.textStyles`             | `@include text-style("{name}")`                |
 
    - slug は省略しない kebab-case（`primary-background` ○ / `primary-bg` ×）。
+   - textStyles の `fontFamily` / `fontSize` はスラッグで指定する。SPとPCで値が違うプロパティは `{ "sp": "1.6", "pc": "1.8" }` と書くと、`media-up(md)` で切り替わる。Figmaの letterSpacing（%）は `em` に換算する（10 → `0.1em`）。
    - fontSizes の `fluid` は必ず `false` か `{ "min": "..px", "max": "..px" }` を明示する（省略するとWordPressが独自に補間するためSCSSと値がずれる）。
 
 3. `npm run theme-json`（`npm start` 中なら自動）で `src/assets/scss/global/_theme-json.scss` が再生成される。このファイルは直接編集しない。
