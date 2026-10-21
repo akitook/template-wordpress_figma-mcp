@@ -10,11 +10,11 @@
   }
 }
 
-// @mixin media-down($breakpoint: md) {
-//   @media #{map-get($breakpoint-down, $breakpoint)} {
-//     @content;
-//   }
-// }
+@mixin media-down($breakpoint: md) {
+  @media #{map.get($breakpoint-down, $breakpoint)} {
+    @content;
+  }
+}
 
 @mixin container($max-width: lg) {
   box-sizing: border-box;
@@ -40,8 +40,15 @@
   }
 }
 
-@function vw-responsive($vw-responsive-px, $pixelsVw) {
-  $responsivepx: map.get($vw-responsive-width, $vw-responsive-px);
+// デザイン幅（$design-width-sp〜$design-width-pc）の間で $min〜$max を線形補間する
+// 例: font-size: fluid(28px, 48px);
+@function fluid($min, $max) {
+  $slope: math.div($max - $min, ($design-width-pc - $design-width-sp) * 1px);
+  $intercept: math.div(
+    math.round(($min - $slope * $design-width-sp * 1px) * 10000),
+    10000
+  );
+  $preferred: math.div(math.round($slope * 100 * 10000), 10000) * 1vw;
 
-  @return math.div($pixelsVw, $responsivepx) * 100vw;
+  @return clamp(#{$min}, #{$intercept} + #{$preferred}, #{$max});
 }

@@ -127,7 +127,20 @@ npm start時に、srcファイルにあるテーマファイルが、publicフ�
 
 ### CSS(SCSS)について
 基本動作としてAutoprefixer（CSSのプロパティにベンダープレフィクス付与）を実行してくれます。
-メディアクエリ指定は、SCSSのミックスインを使って（@include media）で指定を想定しています。
+メディアクエリ指定は、SCSSのミックスインを使って（@include media-up / @include media-down）で指定を想定しています。
+
+### theme.jsonについて
+`src/theme.json` でカラーパレット・フォント・フォントサイズ・余白・サイト全体のスタイル（body・リンク）を管理します。クラシックテーマでも、WordPressがエディタとフロントの両方にスタイル（CSS変数 `--wp--preset--*`）を出力します。
+
+theme.jsonの値は `scripts/theme-json.js` によって `src/assets/scss/global/_theme-json.scss` に変換され、SCSSから `$color-primary` や `$font-size-large` として使えます（`npm start` 中は自動、単体では `npm run theme-json`）。生成ファイルは直接編集しないでください。
+
+`settings.typography.fluid` の `minViewportWidth` / `maxViewportWidth` はデザインのSP幅・PC幅です。SCSSの `fluid(SPの値, PCの値)` 関数はこの範囲で値を線形補間します。
+
+### Figma MCPについて
+Figma MCPを使ってデザインを実装する手順は [docs/agents/figma-mcp.md](./docs/agents/figma-mcp.md) と [docs/agents/figma-mcp-wordpress.md](./docs/agents/figma-mcp-wordpress.md) を参照してください。
+
+- Figma MCPは各自のClaude Code / Cursorに接続してください（Professional以上のDev/Fullシートが必要）。
+- 実装結果の検証用に Playwright MCP を `.mcp.json` に登録しています。Claude Codeでこのリポジトリを開くと利用確認が表示されます。
 
 ### JSについて
 src/assets/js/main.js はViteによるコンパイルが実行されます。

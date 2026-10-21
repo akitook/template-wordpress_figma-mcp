@@ -12,6 +12,7 @@
   },
   "scripts": {
     "preinstall": "npx only-allow npm",
+    "theme-json": "node scripts/theme-json.js",
     "vite:watch": "vite build --watch --mode development",
     "scss:watch": "node scripts/scss.js --watch",
     "copy:watch": "node scripts/copy.js --watch",

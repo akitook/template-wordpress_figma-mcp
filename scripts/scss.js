@@ -6,6 +6,7 @@ const postcss = require("postcss");
 const autoprefixer = require("autoprefixer");
 const fs = require("fs");
 const path = require("path");
+const themeJson = require("./theme-json");
 
 const isWatch = process.argv.includes("--watch");
 const isProduction = process.argv.includes("--production");
@@ -26,6 +27,8 @@ const outputFile = path.resolve(`${outputPath}/assets/css/main.css`);
 
 async function compile() {
   try {
+    // theme.json → _theme-json.scss を先に生成
+    themeJson.generate();
     const result = sass.compile(inputFile, {
       style: isProduction ? "compressed" : "expanded",
       loadPaths: ["node_modules"],
@@ -47,6 +50,8 @@ compile();
 if (isWatch) {
   const chokidar = require("chokidar");
   chokidar
-    .watch("src/assets/scss/**/*.scss", { ignoreInitial: true })
+    .watch(["src/assets/scss/**/*.scss", "src/theme.json"], {
+      ignoreInitial: true,
+    })
     .on("all", compile);
 }

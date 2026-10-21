@@ -46,7 +46,8 @@ npx prettier --check <変更したファイル>   # 崩れていれば --write �
 
 - `src/assets/scss/` は [FLOCSS](https://github.com/hiloki/flocss) 設計に準拠: `foundation/` `global/` `layout/` `object/{component,project,utility}/` `page/`。
 - ページ固有のスタイルは `page/` 配下に追加する。
-- メディアクエリは `global/_mixin.scss` の `@include media` を使う。
+- メディアクエリは `global/_mixin.scss` の `@include media-up(md)` / `@include media-down(md)` を使う（モバイルファースト＝`media-up` が基本）。
+- SPとPCの間で数値を補間する場合は `fluid(SPの値, PCの値)` 関数を使い、`clamp()` を手書きしない。
 - 詳細な設計判断（component vs project の使い分けなど）は [docs/agents/flocss.md](./docs/agents/flocss.md) を参照。
 
 ### 命名規則（重要）
@@ -55,6 +56,23 @@ npx prettier --check <変更したファイル>   # 崩れていれば --write �
 - 例外: utilityクラスの**クラス名のみ**省略可（名前が長くなりがちなため）。utilityの**ファイル名**は省略しない。
 - Object - Component（`c-*`）: 再利用可能なパーツ（例: `c-button`）。**marginは使用しない**。あくまで単体のパーツとして扱う。
 - Object - Project（`p-*`）: 複数のComponentを組み合わせた構成要素（例: `p-card`）。
+
+## デザイントークン（theme.json）
+
+- 色・フォントファミリー・フォントサイズ・余白・コンテンツ幅・サイト全体スタイル（body・リンク等）は **`src/theme.json` が正**。
+- SCSSでは `scripts/theme-json.js` が生成する変数（`$color-*`, `$font-*`, `$font-size-*`, `$spacing-*`, `$design-width-sp/pc` など）を使う。色やフォントサイズをSCSSに直書きしない。新しい値が必要なら theme.json に追加する。
+- `src/assets/scss/global/_theme-json.scss` は自動生成ファイル。**直接編集しない**（`npm start` 中は theme.json の保存で自動再生成、単体では `npm run theme-json`）。
+- body・リンクの基本スタイルは theme.json の `styles` に書く（`foundation/_base.scss` に重複して書かない）。
+
+## Figma MCP での実装
+
+FigmaデザインからのコーディングはFigma MCPを使い、[docs/agents/figma-mcp.md](./docs/agents/figma-mcp.md)（手順の正本）と [docs/agents/figma-mcp-wordpress.md](./docs/agents/figma-mcp-wordpress.md)（このテンプレートでの当てはめ方）に従う。要点:
+
+- Figmaの生成コードはそのまま使わず、メタデータとスクショから仕様を読み取る。`position: absolute` でレイアウトを再現しない。
+- セクション単位で処理し、中間仕様（差分表）を出力したら**一度止まって承認を待つ**。
+- デザイン幅（SP/PC）は theme.json の `settings.typography.fluid` で案件ごとに設定する。
+- 既存の部品（`c-button`, `p-container` など）を優先して使う。
+- 実装後は Playwright MCP（`.mcp.json`）でSP幅・768px・PC幅のスクショを撮り、Figmaと比較して修正する。
 
 ## PHP / WordPress
 
@@ -69,6 +87,8 @@ npx prettier --check <変更したファイル>   # 崩れていれば --write �
 
 | ドキュメント | 参照するタイミング |
 | --- | --- |
+| [docs/agents/figma-mcp.md](./docs/agents/figma-mcp.md) / [docs/agents/figma-mcp-wordpress.md](./docs/agents/figma-mcp-wordpress.md) | FigmaデザインをMCP経由で実装するとき |
+| [docs/project/](./docs/project/README.md) | ページ構成・URL・サイト名・FigmaのURLなど案件固有の情報が必要なとき |
 | [docs/agents/flocss.md](./docs/agents/flocss.md) | SCSSの新規ファイル追加やComponent/Projectの分類に迷ったとき |
 | [docs/agents/wordpress-php.md](./docs/agents/wordpress-php.md) | PHP側でカスタム投稿タイプ、フォーム処理、DBクエリなどを実装するとき |
 | [README.md](./README.md) の `wordmoveの利用方法` | ステージング/本番環境への同期・デプロイをするとき |

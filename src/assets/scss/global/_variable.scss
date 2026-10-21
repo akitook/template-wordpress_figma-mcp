@@ -1,31 +1,6 @@
-// color
-$color-white: #fff;
-$color-black: #000;
-$color-gray: #657786;
-$color-gray-light: #e1e8ed;
-$color-gray-ultralight: #f7f7f7;
-$color-pink: #ed3e73;
-$color-red: #f25f6d;
-$color-yellow: #fad508;
-$color-orange: #f7a61e;
-$color-primary: #0016ff;
-$color-primary-dark: #0016ff;
-$color-primary-light: #4051ff;
-$color-primary-ultralight: #f8fafe;
-$color-primary-bg: #f0f1f7;
-
-// font-family
-
-$font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3",
-  meiryo, メイリオ, sans-serif;
-
-/* Noto Sansを使わない場合
-$font-sans: "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3",
-  Meiryo, メイリオ, sans-serif;
-*/
-$font-serif: georgia, 游明朝, "Yu Mincho", yumincho, "Hiragino Mincho ProN",
-  hgs明朝e, メイリオ, meiryo, serif;
-$font-sans-en: "Montserrat", sans-serif;
+// color / font-family / font-size / spacing / デザイン幅 は src/theme.json が正
+// scripts/theme-json.js が _theme-json.scss に変換する（$color-primary, $font-sans など）
+@forward "theme-json";
 
 // breakpoints bootstrapと共通
 $breakpoint-up: (
@@ -36,13 +11,14 @@ $breakpoint-up: (
   "xl": "screen and (min-width: 1200px)",
 ) !default;
 
-// $breakpoint-down: (
-//   "xs": "screen and (max-width: 424px)",
-//   "sm": "screen and (max-width: 553px)",
-//   "md": "screen and (max-width: 767px)",
-//   "lg": "screen and (max-width: 991px)",
-//   "xl": "screen and (max-width: 1199px)"
-// ) !default;
+// max-width側（media-down mixin, u-hide-down-* で使用）
+$breakpoint-down: (
+  "xs": "screen and (max-width: 424.98px)",
+  "sm": "screen and (max-width: 553.98px)",
+  "md": "screen and (max-width: 767.98px)",
+  "lg": "screen and (max-width: 991.98px)",
+  "xl": "screen and (max-width: 1199.98px)",
+) !default;
 
 // mixin containerのmax-width. XD上のwidth + 80px
 $container-width: (

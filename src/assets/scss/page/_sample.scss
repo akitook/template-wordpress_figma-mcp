@@ -17,7 +17,7 @@
     font-size: 20px;
     line-height: 1.4;
     color: $color-primary;
-    background-color: $color-primary-bg;
+    background-color: $color-primary-background;
     border-radius: 4px;
 
     @include media-up(lg) {
@@ -79,7 +79,7 @@
 
         @media (hover: hover) {
           &:hover {
-            background-color: $color-primary-bg;
+            background-color: $color-primary-background;
 
             &::before {
               right: 12px;
@@ -167,7 +167,7 @@
 
         @media (hover: hover) {
           &:hover {
-            background-color: $color-primary-bg;
+            background-color: $color-primary-background;
 
             &::before {
               right: 12px;
@@ -520,7 +520,7 @@
       padding: 0;
       margin: auto;
       content: "";
-      background: $color-primary-bg;
+      background: $color-primary-background;
       border-radius: 50%;
       transition: all 0.2s ease;
     }
@@ -834,7 +834,7 @@
       display: none;
       padding: 8px 16px;
       margin: 0 16px 16px;
-      background: $color-primary-bg;
+      background: $color-primary-background;
     }
   }
 }
@@ -908,7 +908,7 @@
       &.is-active {
         color: $color-black;
         cursor: initial;
-        background-color: $color-primary-bg;
+        background-color: $color-primary-background;
       }
     }
   }
@@ -920,7 +920,7 @@
       display: none;
       height: 100px;
       padding: 30px;
-      background-color: $color-primary-bg;
+      background-color: $color-primary-background;
 
       &.is-show {
         display: block;
@@ -976,7 +976,7 @@
       display: none;
       height: 100px;
       padding: 30px;
-      background-color: $color-primary-bg;
+      background-color: $color-primary-background;
 
       &.is-show {
         display: block;
@@ -1002,7 +1002,7 @@
       height: 50px;
       color: $color-primary;
       cursor: pointer;
-      background-color: $color-primary-bg;
+      background-color: $color-primary-background;
       transition: all 0.2s ease;
 
       &.a {
@@ -1243,7 +1243,7 @@
       padding: 24px;
       overflow: hidden;
       visibility: hidden;
-      background-color: $color-primary-bg;
+      background-color: $color-primary-background;
       opacity: 0;
       transition: all 0.2s ease;
     }

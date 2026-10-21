@@ -11,12 +11,10 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
-  font-family: $font-sans;
-  font-size: 14px;
-  line-height: 1.5;
-  color: $color-black;
   text-align: left;
-  background: $color-white;
+
+  // font-family / font-size / line-height / color / background は
+  // src/theme.json の styles で指定（WordPressのglobal stylesとして出力される）
 }
 
 /* Noto Sans使用時 IEはメイリオに変更 */
@@ -36,9 +34,8 @@ table {
   border-collapse: collapse;
 }
 
+// color / text-decoration は src/theme.json の styles.elements.link で指定
 a {
-  color: $color-black;
-  text-decoration: none;
   transition: all 0.2s ease;
 
   @media (hover) {

@@ -33,3 +33,35 @@
     }
   }
 }
+
+.u-hide-down {
+  &-xs {
+    @include media-down(xs) {
+      display: none !important;
+    }
+  }
+
+  &-sm {
+    @include media-down(sm) {
+      display: none !important;
+    }
+  }
+
+  &-md {
+    @include media-down(md) {
+      display: none !important;
+    }
+  }
+
+  &-lg {
+    @include media-down(lg) {
+      display: none !important;
+    }
+  }
+
+  &-xl {
+    @include media-down(xl) {
+      display: none !important;
+    }
+  }
+}

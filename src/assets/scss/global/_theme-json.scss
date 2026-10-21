@@ -1,0 +1,80 @@
+// ==========================================================================
+// 自動生成ファイル（scripts/theme-json.js）。直接編集しないこと
+// 値を変更する場合は src/theme.json を編集する
+// ==========================================================================
+
+// デザイン幅（settings.typography.fluid の min/maxViewportWidth）
+$design-width-sp: 375;
+$design-width-pc: 1440;
+
+// color（settings.color.palette）
+$color-white: #fff;
+$color-black: #000;
+$color-gray: #657786;
+$color-gray-light: #e1e8ed;
+$color-gray-ultralight: #f7f7f7;
+$color-pink: #ed3e73;
+$color-red: #f25f6d;
+$color-yellow: #fad508;
+$color-orange: #f7a61e;
+$color-primary: #0016ff;
+$color-primary-dark: #0016ff;
+$color-primary-light: #4051ff;
+$color-primary-ultralight: #f8fafe;
+$color-primary-background: #f0f1f7;
+$colors: (
+  "white": (#fff),
+  "black": (#000),
+  "gray": (#657786),
+  "gray-light": (#e1e8ed),
+  "gray-ultralight": (#f7f7f7),
+  "pink": (#ed3e73),
+  "red": (#f25f6d),
+  "yellow": (#fad508),
+  "orange": (#f7a61e),
+  "primary": (#0016ff),
+  "primary-dark": (#0016ff),
+  "primary-light": (#4051ff),
+  "primary-ultralight": (#f8fafe),
+  "primary-background": (#f0f1f7),
+);
+
+// font-family（settings.typography.fontFamilies）
+$font-sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", meiryo, メイリオ, sans-serif;
+$font-serif: georgia, 游明朝, "Yu Mincho", yumincho, "Hiragino Mincho ProN", hgs明朝e, メイリオ, meiryo, serif;
+$font-sans-en: "Montserrat", sans-serif;
+$font-families: (
+  "sans": ("Noto Sans JP", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3", meiryo, メイリオ, sans-serif),
+  "serif": (georgia, 游明朝, "Yu Mincho", yumincho, "Hiragino Mincho ProN", hgs明朝e, メイリオ, meiryo, serif),
+  "sans-en": ("Montserrat", sans-serif),
+);
+
+// font-size（settings.typography.fontSizes）
+$font-size-small: 12px;
+$font-size-medium: 14px;
+$font-size-large: clamp(16px, 14.5915px + 0.3756vw, 20px);
+$font-size-x-large: clamp(22px, 19.8873px + 0.5634vw, 28px);
+$font-size-xx-large: clamp(28px, 23.7746px + 1.1268vw, 40px);
+$font-sizes: (
+  "small": (12px),
+  "medium": (14px),
+  "large": (clamp(16px, 14.5915px + 0.3756vw, 20px)),
+  "x-large": (clamp(22px, 19.8873px + 0.5634vw, 28px)),
+  "xx-large": (clamp(28px, 23.7746px + 1.1268vw, 40px)),
+);
+
+// spacing（settings.spacing.spacingSizes）
+$spacing-small: 16px;
+$spacing-medium: 32px;
+$spacing-large: 64px;
+$spacing-x-large: 96px;
+$spacing-sizes: (
+  "small": (16px),
+  "medium": (32px),
+  "large": (64px),
+  "x-large": (96px),
+);
+
+// layout（settings.layout）
+$content-size: 880px;
+$wide-size: 1280px;

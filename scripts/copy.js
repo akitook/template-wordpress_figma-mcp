@@ -18,7 +18,7 @@ if (isProduction) {
 }
 
 const source =
-  'src/**/*.{html,php,css,png,jpg,gif,svg,ico,woff,woff2,eot,ttf,txt,md,pdf,webm,mp4}'
+  'src/**/*.{html,php,css,json,png,jpg,gif,svg,ico,woff,woff2,eot,ttf,txt,md,pdf,webm,mp4}'
 
 if (isWatch) {
   cpx.watch(source, outputPath)

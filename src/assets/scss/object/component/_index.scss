@@ -112,7 +112,7 @@
     padding: 12px;
     vertical-align: middle;
     appearance: none;
-    background: $color-primary-bg;
+    background: $color-primary-background;
     border-radius: 4px;
 
     @include media-up(md) {
@@ -160,8 +160,8 @@
         vertical-align: top;
         cursor: pointer;
         content: "";
-        background: $color-primary-bg;
-        border: 1px solid $color-primary-bg;
+        background: $color-primary-background;
+        border: 1px solid $color-primary-background;
         border-radius: 100%;
       }
     }
@@ -170,7 +170,7 @@
       + .text,
       + .mwform-radio-field-text {
         &::before {
-          border-color: $color-primary-bg;
+          border-color: $color-primary-background;
           outline: none;
         }
       }
