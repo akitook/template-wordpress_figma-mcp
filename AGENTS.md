@@ -70,7 +70,8 @@ FigmaデザインからのコーディングはFigma MCPを使い、[docs/agents
 
 - Figmaの生成コードはそのまま使わず、メタデータとスクショから仕様を読み取る。`position: absolute` でレイアウトを再現しない。
 - セクション単位で処理し、中間仕様（差分表）を出力したら**一度止まって承認を待つ**。
-- デザイン幅（SP/PC）は theme.json の `settings.typography.fluid` で案件ごとに設定する。
+- デザイン幅（PC/SP/TAB）は案件ごとに異なる。最初の実装前にユーザーに確認して `docs/project/site-info.md` に記録し、PC/SPは theme.json の `settings.typography.fluid` に反映する。
+- ページごとのFigmaリンクは `docs/project/sitemap.md` の「デザインデータ（Figma）」表を使う。制作途中でURLが追加・変更されたら、その作業の中で表を更新する。
 - 既存の部品（`c-button`, `p-container` など）を優先して使う。
 - 実装後は Playwright MCP（`.mcp.json`）でSP幅・768px・PC幅のスクショを撮り、Figmaと比較して修正する。
 

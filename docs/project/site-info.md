@@ -38,6 +38,13 @@
 
 ## デザインデータ
 
-| 項目  | 値     |
-| ----- | ------ |
-| Figma | 要確認 |
+| 項目           | 値     |
+| -------------- | ------ |
+| Figma ファイル | 要確認 |
+| PCデザイン幅   | 要確認 |
+| SPデザイン幅   | 要確認 |
+| TABデザイン幅  | 要確認 |
+
+- デザイン幅はFigmaのフレーム幅。案件によって異なるため、セットアップ時に確認して記入する（TABのデザインがない場合は `-`）。手順は [figma-mcp-wordpress.md](../agents/figma-mcp-wordpress.md) の「セットアップ」。
+- PC/SPの幅は `src/theme.json` の `settings.typography.fluid`（`maxViewportWidth` / `minViewportWidth`）と必ず一致させる。
+- ページごとのフレーム（PC/SP/TAB）のリンクは [sitemap.md](./sitemap.md) の「デザインデータ（Figma）」に書く。
