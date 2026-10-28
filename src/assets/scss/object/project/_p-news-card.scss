@@ -1,0 +1,83 @@
+@use "../../global" as *;
+
+// お知らせのカード（写真＋日付・カテゴリ＋タイトル）。SPは縦積み、lg以上は横並び
+.p-news-card {
+  &__link {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: $color-gray-900;
+
+    @include media-up(lg) {
+      flex-direction: row;
+      gap: design-scale(56px);
+      align-items: center;
+    }
+  }
+
+  &__thumbnail {
+    flex-shrink: 0;
+    width: 110px;
+
+    @include media-up(lg) {
+      width: design-scale(240px);
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    @include media-up(lg) {
+      gap: 24px;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    @include media-up(lg) {
+      gap: 16px;
+    }
+  }
+
+  &__date {
+    font-family: $font-sans-en;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: $color-gray-600;
+    letter-spacing: 0.14em;
+
+    @include media-up(lg) {
+      font-size: 18px;
+    }
+  }
+
+  &__category {
+    @include text-style("caption-medium");
+
+    padding: 0 20px;
+    background-color: rgb(221 221 221 / 25%);
+  }
+
+  &__title {
+    @include text-style("body-light");
+
+    @include media-up(lg) {
+      @include text-style("title-medium");
+
+      max-width: design-scale(640px);
+    }
+  }
+}

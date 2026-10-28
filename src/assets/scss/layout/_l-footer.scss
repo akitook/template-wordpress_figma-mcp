@@ -22,6 +22,12 @@
     color: inherit;
   }
 
+  &__menu a,
+  &__contact a,
+  &__legal a {
+    @include link-underline;
+  }
+
   &__inner {
     display: grid;
     grid-template-areas:

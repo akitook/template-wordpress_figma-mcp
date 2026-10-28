@@ -22,4 +22,13 @@
     height: auto;
     transform: rotate(45deg);
   }
+
+  // 濃い色（Figma: contact の「LINEで相談する」）
+  &--dark {
+    color: $color-gray-50;
+
+    &::before {
+      background-color: $color-gray-600;
+    }
+  }
 }

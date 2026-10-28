@@ -60,6 +60,42 @@
   @return clamp(#{$min}, #{$intercept} + #{$preferred}, #{$max});
 }
 
+// PCデザインの値を、画面幅に比例して縮小する（lg 992px〜PC 1920px）。lg以上で使う
+// TABデザイン（1280px）はPCの2/3なので、1280pxでTABの値と一致する
+// 例: width: design-scale(240px); → 1280pxで160px、1920pxで240px
+@function design-scale($value) {
+  @return fluid(
+    math.div($value * 992, $design-width-pc),
+    $value,
+    992,
+    $design-width-pc
+  );
+}
+
+// テキストリンクのホバー: 下線が左から右へ伸び、ホバーを外すと右へ縮んで消える
+@mixin link-underline($thickness: 1px) {
+  background-image: linear-gradient(currentcolor, currentcolor);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: 0% $thickness;
+  transition: background-size 0.4s ease;
+
+  @media (hover: hover) {
+    &:hover {
+      @include link-underline-shown($thickness);
+
+      opacity: 1;
+    }
+  }
+}
+
+// 下線を伸ばした状態。リンクの中の一部（テキストだけ）に下線を付けるときに、親のホバーで使う
+// 例: .c-arrow-link:hover .c-arrow-link__text { @include link-underline-shown; }
+@mixin link-underline-shown($thickness: 1px) {
+  background-position: left bottom;
+  background-size: 100% $thickness;
+}
+
 // 和紙テクスチャの背景（Figma: ricepaper を不透明度50%で敷き、その上に色を乗算）
 // 子要素より下に色を重ねるため isolation で重なり順を閉じる
 @mixin texture-background($overlay-color) {

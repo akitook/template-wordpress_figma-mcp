@@ -47,6 +47,10 @@
     color: inherit;
   }
 
+  &__list a {
+    @include link-underline;
+  }
+
   &__header {
     display: flex;
     align-items: center;

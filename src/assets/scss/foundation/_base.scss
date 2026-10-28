@@ -13,7 +13,13 @@ body {
   margin: 0;
   text-align: left;
 
-  // font-family / font-size / line-height / color / background は
+  // 和紙テクスチャ（Figma: 各ページの texture。ricepaper を不透明度50%で敷く）
+  background-image:
+    linear-gradient(rgb(255 255 255 / 50%), rgb(255 255 255 / 50%)),
+    url("../img/common/texture.png");
+  background-size: auto, 485px;
+
+  // font-family / font-size / line-height / color / background-color は
   // src/theme.json の styles で指定（WordPressのglobal stylesとして出力される）
 }
 

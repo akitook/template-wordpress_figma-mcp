@@ -1,0 +1,32 @@
+@use "../../global" as *;
+
+// 「‣ Knotについて」形式のリンク（左に小さな三角、Figma: JP/PC/button/large）
+.c-arrow-link {
+  @include text-style("button");
+
+  display: inline-flex;
+  gap: 16px;
+  align-items: center;
+  color: $color-gray-900;
+
+  &__icon {
+    width: 6px;
+    height: auto;
+    transform: rotate(180deg);
+  }
+
+  &__text {
+    @include link-underline;
+  }
+
+  // テキスト部分だけに下線を付けるため、リンク全体のホバーでテキストの下線を伸ばす
+  @media (hover: hover) {
+    &:hover {
+      opacity: 1;
+    }
+
+    &:hover &__text {
+      @include link-underline-shown;
+    }
+  }
+}

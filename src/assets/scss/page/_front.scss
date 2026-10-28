@@ -1,147 +1,674 @@
 @use "../global" as *;
 
-.page-front {
-  .mainview {
-    padding: 64px 0;
-    background-color: $color-gray-50;
+// トップページ（Figma: TOP_SP 375 / TOP_PC 1920。TAB 1280はPCの2/3）
+// SPの値はpx、lg以上は design-scale()（PCの値をTAB〜PCで比例縮小）で書く
+.front {
+  overflow-x: clip;
+}
+
+// 装飾の斜線（Figma: Group 6366 など）。重ね合わせのみで、レイアウトには影響させない
+%front-decoration {
+  position: absolute;
+  z-index: -1;
+  height: auto;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* Hero
+   ----------------------------------------------------------------- */
+.front-hero {
+  position: relative;
+  padding-top: 40px;
+  isolation: isolate;
+
+  @include media-up(lg) {
+    padding-top: 0;
+  }
+
+  // 写真の後ろの薄いグレーの面
+  &__visual {
+    position: relative;
+    padding: 57px 20px;
+    isolation: isolate;
 
     @include media-up(lg) {
-      padding: 80px 0;
+      width: design-scale(1200px);
+      padding: design-scale(145px) design-scale(100px) design-scale(125px);
+      margin: 0 auto;
     }
 
-    .mainview__container {
-      display: flex;
-      align-items: center;
-      height: 100vh;
-      max-height: 400px;
+    &::before {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      content: "";
+      background-color: rgb(153 153 153 / 5%);
+      mix-blend-mode: multiply;
+    }
+  }
+
+  &__photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1000 / 1330;
+    object-fit: cover;
+  }
+
+  // Figmaでは左右反転して配置されている
+  &__decoration {
+    @extend %front-decoration;
+
+    top: 420px;
+    left: 0;
+    width: 152px;
+    transform: scaleX(-1);
+
+    @include media-up(lg) {
+      top: design-scale(1107px);
+      left: design-scale(80px);
+      width: design-scale(464px);
+    }
+  }
+
+  // 最新のお知らせ1件
+  &__news {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 160px 20px 0;
+    color: $color-gray-900;
+
+    @include media-up(lg) {
+      flex-direction: row;
+      gap: 24px;
+      margin: design-scale(80px) 0 0 design-scale(792px);
     }
 
-    .mainview-title {
-      .mainview-title__ja {
-        font-size: 6vw;
-
-        @include media-up(md) {
-          font-size: 40px;
-        }
+    @media (hover: hover) {
+      &:hover {
+        opacity: 1;
       }
 
-      .mainview-title__en {
-        font-family: $font-sans-en;
-        font-size: 1.5vw;
-        color: $color-gray-600;
-
-        @include media-up(md) {
-          font-size: 16px;
-        }
+      &:hover .front-hero__news-title {
+        @include link-underline-shown;
       }
     }
   }
 
-  .about {
-    padding: 32px 0;
+  &__news-meta {
+    display: flex;
+    flex-shrink: 0;
+    gap: 12px;
+    align-items: center;
 
     @include media-up(lg) {
-      padding: 64px 0;
-    }
-
-    .about__description {
-      margin-top: 16px;
-
-      @include media-up(md) {
-        margin-top: 24px;
-      }
-
-      p + p {
-        margin-top: 1.5em;
-      }
+      justify-content: flex-end;
+      width: design-scale(104px);
+      padding-top: 4px;
     }
   }
 
-  .news {
-    padding: 32px 0;
+  &__news-date {
+    font-family: $font-sans-en;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: $color-gray-600;
+    letter-spacing: 0.14em;
 
     @include media-up(lg) {
-      padding: 64px 0;
+      font-size: 16px;
+    }
+  }
+
+  &__news-category {
+    @include text-style("caption-medium");
+
+    padding: 0 20px;
+    background-color: rgb(221 221 221 / 25%);
+  }
+
+  &__news-title {
+    @include text-style("body-light");
+    @include link-underline;
+
+    @include media-up(lg) {
+      max-width: design-scale(640px);
+    }
+  }
+}
+
+/* Our Philosophy
+   ----------------------------------------------------------------- */
+.front-philosophy {
+  position: relative;
+  padding: 120px 20px 0;
+  isolation: isolate;
+
+  @include media-up(lg) {
+    display: grid;
+    grid-template-columns: design-scale(864px) 1fr;
+    column-gap: design-scale(160px);
+    align-items: start;
+    padding: design-scale(320px) design-scale(160px) 0;
+  }
+
+  &__heading {
+    @include media-up(lg) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 864 / 564;
+    margin-top: 80px;
+    object-fit: cover;
+
+    @include media-up(lg) {
+      margin-top: design-scale(120px);
+    }
+  }
+
+  &__content {
+    margin-top: 80px;
+
+    @include media-up(lg) {
+      margin-top: design-scale(120px);
+    }
+  }
+
+  &__lead {
+    @include text-style("title-large");
+  }
+
+  &__text {
+    @include text-style("body-large");
+
+    display: flex;
+    flex-direction: column;
+    gap: 2.4em; // 本文1行分の空き（行間2.4）
+    // 行末の字間（0.1em）でFigmaより1行多く折り返さないよう、字間1つ分だけ幅を広げる
+    margin: 64px -0.1em 0 74px;
+
+    @include media-up(lg) {
+      margin: design-scale(89px) 0 0 design-scale(160px);
+    }
+  }
+
+  &__link {
+    display: flex;
+    width: fit-content;
+    margin: 80px auto 0;
+
+    @include media-up(lg) {
+      grid-column: 1 / -1;
+      margin-top: design-scale(160px);
+    }
+  }
+
+  &__decoration {
+    @extend %front-decoration;
+
+    right: 0;
+    bottom: 240px;
+    width: 53px;
+
+    @include media-up(lg) {
+      right: design-scale(40px);
+      bottom: design-scale(400px);
+      width: design-scale(160px);
+    }
+  }
+
+  &__detail {
+    display: block;
+    width: 150px;
+    height: auto;
+    margin: 120px 0 0 auto;
+
+    @include media-up(lg) {
+      grid-column: 1 / -1;
+      justify-self: end;
+      width: design-scale(240px);
+      margin-top: design-scale(80px);
+    }
+  }
+}
+
+/* Talk About Yours.（プラン）
+   SPは 見出し→コピー→本文→写真→リンク の順、lg以上は コピー｜写真｜本文 の3カラム
+   ----------------------------------------------------------------- */
+.front-plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 120px 20px 0;
+  isolation: isolate;
+
+  @include media-up(lg) {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    grid-template-columns: design-scale(540px) design-scale(520px) 1fr;
+    padding: design-scale(120px) design-scale(160px) 0;
+  }
+
+  // 手をつなぐ写真の背景（Figma: スクリーンショット 15.05.38 4。書き出し画像に不透明度10%が反映済み）
+  &::before {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    height: 868px;
+    content: "";
+    background: url("../img/front/plan-background.jpg") center top / cover
+      no-repeat;
+    mix-blend-mode: multiply;
+
+    @include media-up(lg) {
+      top: calc(design-scale(80px) * -1);
+      height: design-scale(2800px);
+    }
+  }
+
+  &__heading {
+    order: 1;
+
+    @include media-up(lg) {
+      grid-row: 1;
+      grid-column: 1 / -1;
+    }
+  }
+
+  &__lead {
+    @include text-style("title-large");
+
+    order: 2;
+    margin-top: 80px;
+
+    @include media-up(lg) {
+      grid-row: 2;
+      grid-column: 1;
+      padding-left: design-scale(68px);
+      margin-top: design-scale(320px);
+    }
+  }
+
+  &__text {
+    @include text-style("body-large");
+
+    display: flex;
+    flex-direction: column;
+    gap: 4.8em; // 本文2行分の空き（行間2.4）。lg以上は3行分
+    order: 3;
+    margin: 64px 0 0 40px;
+
+    @include media-up(lg) {
+      grid-row: 2;
+      grid-column: 3;
+      gap: 7.2em;
+      padding-left: design-scale(160px);
+      margin: design-scale(496px) 0 0;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    order: 4;
+    width: 255px;
+    max-width: calc(100% - 40px);
+    margin: 80px 0 0 40px;
+
+    @include media-up(lg) {
+      grid-row: 2 / span 2;
+      grid-column: 2;
+      gap: design-scale(80px);
+      width: auto;
+      max-width: none;
+      margin: design-scale(120px) 0 0;
+    }
+  }
+
+  &__card {
+    position: relative;
+    display: block;
+  }
+
+  &__photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 520 / 693;
+    object-fit: cover;
+  }
+
+  // 書の文字（むに・間 あわい・うつしき）を写真の中央に重ねる。幅は写真に対する比率
+  &__title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: auto;
+    transform: translate(-50%, -50%);
+
+    &--muni {
+      width: 32%;
     }
 
-    .news__list {
-      display: flex;
-      flex-direction: column;
-      margin-top: 16px;
-
-      @include media-up(md) {
-        flex-direction: row;
-        margin: 24px -16px 0;
-      }
+    &--awai {
+      width: 21.06%;
     }
 
-    .news__item {
-      @include media-up(md) {
-        width: calc(100% / 3);
-        padding: 16px;
-      }
+    &--utsushiki {
+      width: 18.79%;
+    }
+  }
 
-      & + .news__item {
-        margin-top: 16px;
+  &__link {
+    display: flex;
+    order: 5;
+    width: fit-content;
+    margin: 80px auto 0;
 
-        @include media-up(md) {
-          margin-top: 0;
-        }
-      }
+    @include media-up(lg) {
+      grid-row: 3;
+      grid-column: 3;
+      align-self: end;
+      padding-left: design-scale(160px);
+      margin: 0 0 design-scale(84px);
+    }
+  }
+
+  &__decoration {
+    @extend %front-decoration;
+
+    top: calc(100% + 24px);
+    left: 0;
+    width: 152px;
+    transform: scaleX(-1);
+
+    @include media-up(lg) {
+      top: auto;
+      bottom: calc(design-scale(251px) * -1);
+      left: design-scale(80px);
+      width: design-scale(464px);
+    }
+  }
+}
+
+/* Works
+   ----------------------------------------------------------------- */
+.front-works {
+  position: relative;
+  padding: 200px 20px;
+  margin-top: 120px;
+  isolation: isolate;
+
+  @include media-up(lg) {
+    padding: design-scale(320px) design-scale(160px) design-scale(323px);
+    margin-top: design-scale(280px);
+  }
+
+  // 上下がぼけたグレーの帯（Figma: gradation）
+  &::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    content: "";
+    background-image: linear-gradient(
+      180deg,
+      rgb(221 221 221 / 0%) 0%,
+      $color-gray-200 20%,
+      $color-gray-200 80%,
+      rgb(221 221 221 / 0%) 100%
+    );
+    mix-blend-mode: multiply;
+    opacity: 0.8;
+  }
+
+  // lg以上: 写真の一覧と右のタイトル一覧を同じ場所に重ね、タイトル一覧を右下に寄せる
+  &__container {
+    margin-top: 80px;
+
+    @include media-up(lg) {
+      display: grid;
+      margin-top: design-scale(120px);
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    @include media-up(lg) {
+      display: grid;
+      grid-area: 1 / 1;
+      grid-template-columns: repeat(3, design-scale(240px)) 1fr;
+      gap: design-scale(82px) design-scale(140px);
+      align-items: start;
+    }
+  }
+
+  // SPは左右にずらして縦に並べる（ずらし幅は内容幅335pxに対する比率）
+  &__item {
+    width: 53.7%;
+
+    @include media-up(lg) {
+      width: design-scale(240px);
     }
 
-    .news__action {
-      display: flex;
-      justify-content: center;
+    &:nth-child(1),
+    &:nth-child(4),
+    &:nth-child(5),
+    &:nth-child(7) {
+      margin-left: 46.3%;
+    }
+
+    &:nth-child(3),
+    &:nth-child(8) {
+      margin-left: 23%;
+    }
+
+    &:nth-child(4),
+    &:nth-child(7),
+    &:nth-child(8) {
       margin-top: 24px;
+    }
 
-      @include media-up(md) {
-        margin-top: 40px;
+    &:nth-child(5) {
+      margin-top: 40px;
+    }
+
+    @include media-up(lg) {
+      &:nth-child(n) {
+        margin: 0;
+      }
+
+      // 縦のずれは行の高さを変えないよう translate で付ける
+      &:nth-child(2) {
+        translate: 0 design-scale(40px);
+      }
+
+      &:nth-child(4) {
+        margin-left: design-scale(40px);
+      }
+
+      &:nth-child(6) {
+        translate: 0 design-scale(50px);
+      }
+
+      &:nth-child(8) {
+        grid-row: 3;
+        grid-column: 1;
+        margin-left: design-scale(40px);
+        translate: 0 design-scale(30px);
       }
     }
   }
 
-  .column {
-    padding: 32px 0;
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: $color-gray-900;
+  }
+
+  &__thumbnail img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+
+  &__caption {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+  }
+
+  &__number {
+    flex-shrink: 0;
+    font-family: $font-sans-en;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: $color-gray-600;
+    letter-spacing: 0.1em;
 
     @include media-up(lg) {
-      padding: 64px 0;
+      font-size: 16px;
+    }
+  }
+
+  &__title {
+    @include text-style("body-light");
+  }
+
+  &__index {
+    display: grid;
+    grid-area: 1 / 1;
+    grid-template-rows: repeat(4, auto);
+    grid-auto-flow: column;
+    gap: design-scale(40px) design-scale(32px);
+    align-self: start;
+    justify-self: end;
+    width: design-scale(420px);
+    margin-top: design-scale(346px);
+  }
+
+  &__index-item {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+
+    .front-works__number {
+      width: 18px;
+      font-size: 14px;
     }
 
-    .column__list {
-      display: flex;
-      flex-direction: column;
-      margin-top: 16px;
+    a {
+      @include text-style("body-light");
+      @include link-underline;
 
-      @include media-up(md) {
-        flex-direction: row;
-        margin: 24px -16px 0;
+      color: $color-gray-900;
+    }
+  }
+
+  &__link {
+    display: flex;
+    width: fit-content;
+    margin: 80px auto 0;
+
+    // lg以上は最後の写真（08）の横、右端に置く
+    @include media-up(lg) {
+      margin: 0 0 0 design-scale(1406px);
+    }
+  }
+}
+
+/* News
+   ----------------------------------------------------------------- */
+.front-news {
+  position: relative;
+  padding: 120px 20px 0;
+  isolation: isolate;
+
+  @include media-up(lg) {
+    padding: design-scale(237px) design-scale(160px) 0;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    margin-top: 80px;
+
+    @include media-up(lg) {
+      gap: design-scale(120px);
+      margin-top: design-scale(114px);
+    }
+  }
+
+  // 1件ずつ右へずらす
+  &__item {
+    max-width: 235px;
+
+    @include media-up(lg) {
+      max-width: none;
+    }
+
+    &:nth-child(2) {
+      margin-left: 50px;
+
+      @include media-up(lg) {
+        margin-left: design-scale(200px);
       }
     }
 
-    .column__item {
-      @include media-up(md) {
-        width: calc(100% / 2);
-        padding: 16px;
-      }
+    &:nth-child(3) {
+      margin-left: 100px;
 
-      & + .column__item {
-        margin-top: 16px;
-
-        @include media-up(md) {
-          margin-top: 0;
-        }
+      @include media-up(lg) {
+        margin-left: design-scale(360px);
       }
     }
 
-    .column__action {
-      display: flex;
-      justify-content: center;
-      margin-top: 24px;
-
-      @include media-up(md) {
-        margin-top: 40px;
+    &:nth-child(1) {
+      @include media-up(lg) {
+        margin-left: design-scale(80px);
       }
+    }
+  }
+
+  &__link {
+    display: flex;
+    width: fit-content;
+    margin: 58px auto 0;
+
+    @include media-up(lg) {
+      margin-top: design-scale(160px);
+    }
+  }
+
+  &__decoration {
+    @extend %front-decoration;
+
+    top: -140px;
+    right: -10px;
+    width: 152px;
+
+    @include media-up(lg) {
+      top: design-scale(40px);
+      right: calc(design-scale(56px) * -1);
+      width: design-scale(464px);
     }
   }
 }

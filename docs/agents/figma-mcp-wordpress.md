@@ -118,14 +118,14 @@ FigmaのURLは制作途中で追加・差し替えが頻繁に起こる。sitema
 
 ガイドの「既存テンプレートを優先する」は、このテンプレートでは次を指す。
 
-| 種類                 | 既存の部品                                                                                                                                                                                      |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Layout               | `l-header`, `l-footer`, `l-page`, `l-main`                                                                                                                                                      |
-| Component            | `c-button`（`--small`/`--large`/`--outlined`/`--rounded`）, `c-button-wrapper`, `c-input`, `c-select`, `c-radio`, `c-external-link`（テキスト＋↗）, `c-paper-button`（和紙テクスチャのボタン） |
-| Project              | `p-container`（`--sm`/`--lg`）, `p-section-title`, `p-article-card`, `p-breadcrumb`, `p-pagination`, `p-form`, `p-editor-content`, `p-menu`（メニュー展開時）                                   |
-| Utility              | `u-hide-up-{xs,sm,md,lg,xl}`, `u-hide-down-{xs,sm,md,lg,xl}`                                                                                                                                    |
-| template-parts / PHP | `page-header.php`, `breadcrumb.php`、リンク・連絡先は `site_links()` / `site_contact()`、テーマ画像のURLは `theme_image_url()`（`functions/custom_site_links.php`）                             |
-| Mixin / 関数         | `container()`, `media-up()`, `media-down()`, `hover()`, `fluid()`, `text-style()`, `texture-background()`（和紙テクスチャ＋色の乗算）                                                           |
+| 種類                 | 既存の部品                                                                                                                                                                                                                                                                               |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Layout               | `l-header`, `l-footer`, `l-page`, `l-main`                                                                                                                                                                                                                                               |
+| Component            | `c-button`（`--small`/`--large`/`--outlined`/`--rounded`）, `c-button-wrapper`, `c-input`, `c-select`, `c-radio`, `c-external-link`（テキスト＋↗）, `c-paper-button`（和紙テクスチャのボタン、`--dark`）, `c-arrow-link`（‣ 付きリンク）, `c-section-heading`（英字のセクション見出し） |
+| Project              | `p-container`（`--sm`/`--lg`）, `p-section-title`, `p-article-card`, `p-breadcrumb`, `p-pagination`, `p-form`, `p-editor-content`, `p-menu`（メニュー展開時）, `p-news-card`（お知らせのカード）, `p-contact`（お問い合わせ導線。`template-parts/contact.php`）                          |
+| Utility              | `u-hide-up-{xs,sm,md,lg,xl}`, `u-hide-down-{xs,sm,md,lg,xl}`                                                                                                                                                                                                                             |
+| template-parts / PHP | `page-header.php`, `breadcrumb.php`、リンク・連絡先は `site_links()` / `site_contact()`、テーマ画像のURLは `theme_image_url()`（`functions/custom_site_links.php`）                                                                                                                      |
+| Mixin / 関数         | `container()`, `media-up()`, `media-down()`, `hover()`, `fluid()`, `design-scale()`（PCの値をlg〜PCで比例縮小）, `text-style()`, `texture-background()`, `link-underline()` / `link-underline-shown()`（テキストリンクのホバー下線）                                                     |
 
 ## 差分の種類と実装方針（このテンプレートでの書き方）
 
@@ -142,6 +142,8 @@ FigmaのURLは制作途中で追加・差し替えが頻繁に起こる。sitema
 
 - ブレークポイントは `global/_variable.scss` の `$breakpoint-up` / `$breakpoint-down`（xs 425 / sm 554 / md 768 / lg 992 / xl 1200）。
 - 横幅の制御は `container()` mixin か `p-container` を使い、`position: absolute` でレイアウトを再現しない（装飾の重ね合わせのみ可）。
+- テキストリンクには `link-underline()` を付ける（ホバーで下線が左から伸び、外すと右へ縮む）。画像やボタンには付けない。
+- lg以上でPCデザインの値をそのまま使う場合は `design-scale(PCの値)` を使う（1280pxでTABの値＝PCの2/3になる）。
 - 色・フォントは生成変数（`$color-*`, `$font-*`, `$font-size-*`）を使い、Figmaの値を直書きしない。theme.json にない値が出てきたら、追加するか近い既存値に寄せるかを中間仕様の「判断が必要な点」に書く。
 
 ## 検証（Playwright MCP）

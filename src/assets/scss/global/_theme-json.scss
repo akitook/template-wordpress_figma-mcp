@@ -41,12 +41,18 @@ $font-size-caption-fixed: 14px;
 $font-size-body: clamp(14px, 13.5146px + 0.1294vw, 16px);
 $font-size-title-medium: 20px;
 $font-size-title-large: clamp(20px, 19.0291px + 0.2589vw, 24px);
+$font-size-heading-small: clamp(32px, 30.0583px + 0.5178vw, 40px);
+$font-size-heading: clamp(32px, 28.1165px + 1.0356vw, 48px);
+$font-size-display: clamp(44px, 37.2039px + 1.8123vw, 72px);
 $font-sizes: (
   "caption": (clamp(10px, 9.0291px + 0.2589vw, 14px)),
   "caption-fixed": (14px),
   "body": (clamp(14px, 13.5146px + 0.1294vw, 16px)),
   "title-medium": (20px),
   "title-large": (clamp(20px, 19.0291px + 0.2589vw, 24px)),
+  "heading-small": (clamp(32px, 30.0583px + 0.5178vw, 40px)),
+  "heading": (clamp(32px, 28.1165px + 1.0356vw, 48px)),
+  "display": (clamp(44px, 37.2039px + 1.8123vw, 72px)),
 );
 
 // spacing（settings.spacing.spacingSizes）
@@ -115,5 +121,12 @@ $text-styles: (
     "font-weight": 500,
     "line-height": 1.8,
     "letter-spacing": 0.1em,
+  ),
+  "heading-english": (
+    "font-family": ("Afacad Flux", sans-serif),
+    "font-size": (clamp(32px, 28.1165px + 1.0356vw, 48px)),
+    "font-weight": 100,
+    "line-height": 1.5,
+    "letter-spacing": 0.2em,
   ),
 );

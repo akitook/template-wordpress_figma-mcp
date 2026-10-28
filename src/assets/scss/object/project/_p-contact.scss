@@ -1,0 +1,226 @@
+@use "../../global" as *;
+
+// お問い合わせ導線（Figma: contact_sp / contact_pc。TABはPCの2/3）
+// SPは縦積み、lg以上は写真と文章の2カラム
+.p-contact {
+  position: relative;
+  padding: 280px 20px 120px;
+  margin-top: 120px;
+  overflow: hidden;
+  isolation: isolate;
+
+  @include media-up(lg) {
+    padding: design-scale(118px) 0 design-scale(200px);
+    margin-top: design-scale(320px);
+  }
+
+  // 薄いグレーの面（Figma: Rectangle 34624953）
+  &::before {
+    position: absolute;
+    top: 160px;
+    right: 0;
+    left: 0;
+    z-index: -1;
+    height: 1614px;
+    content: "";
+    background-color: rgb(153 153 153 / 5%);
+    mix-blend-mode: multiply;
+
+    @include media-up(lg) {
+      top: design-scale(240px);
+      height: design-scale(1680px);
+    }
+  }
+
+  &__detail {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    width: 150px;
+    height: auto;
+
+    @include media-up(lg) {
+      right: design-scale(160px);
+      width: design-scale(240px);
+    }
+  }
+
+  &__title {
+    display: flex;
+    flex-direction: column;
+    font-family: $font-sans-en;
+    font-size: $font-size-display;
+    font-weight: 100;
+    line-height: 1.5;
+    color: $color-gray-600;
+    letter-spacing: 0.2em;
+    opacity: 0.9;
+
+    @include media-up(lg) {
+      margin-left: design-scale(580px);
+    }
+  }
+
+  &__title-line {
+    padding-left: 0.4em;
+
+    &--second {
+      padding-left: 2em;
+    }
+
+    &--third {
+      padding-left: 4em;
+    }
+  }
+
+  &__body {
+    margin-top: 80px;
+
+    @include media-up(lg) {
+      display: grid;
+      grid-template-columns: design-scale(720px) design-scale(640px);
+      column-gap: design-scale(242px);
+      align-items: start;
+      margin: design-scale(198px) 0 0 design-scale(160px);
+    }
+  }
+
+  &__photo {
+    width: 255px;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+
+    @include media-up(lg) {
+      width: 100%;
+    }
+  }
+
+  &__content {
+    margin-top: 80px;
+
+    @include media-up(lg) {
+      margin-top: design-scale(42px);
+    }
+  }
+
+  &__lead {
+    @include text-style("title-large");
+  }
+
+  &__text {
+    @include text-style("body-large");
+
+    display: flex;
+    flex-direction: column;
+    gap: 4.8em; // 本文2行分の空き（行間2.4）。lg以上は3行分
+    margin: 64px 0 0 64px;
+
+    @include media-up(lg) {
+      gap: 7.2em;
+      margin: design-scale(80px) 0 0 design-scale(160px);
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 92px;
+
+    @include media-up(lg) {
+      flex-direction: row;
+      margin-top: design-scale(240px);
+    }
+
+    .c-paper-button {
+      @include text-style("button");
+
+      min-height: 56px;
+
+      @include media-up(lg) {
+        width: design-scale(312px);
+        min-height: design-scale(80px);
+      }
+    }
+  }
+
+  &__instagram {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    align-items: center;
+    margin-top: 280px;
+    text-align: center;
+
+    @include media-up(lg) {
+      flex-direction: row;
+      gap: design-scale(56px);
+      align-items: center;
+      justify-content: center;
+      margin-top: design-scale(520px);
+      text-align: left;
+    }
+  }
+
+  &__instagram-title {
+    font-family: $font-sans-en;
+    font-size: $font-size-heading-small;
+    font-weight: 200;
+    line-height: 1.5;
+    color: $color-gray-800;
+    letter-spacing: 0.2em;
+    opacity: 0.9;
+
+    @include media-up(lg) {
+      margin-right: design-scale(19px);
+    }
+  }
+
+  &__instagram-text {
+    @include text-style("body-large");
+
+    @include media-up(lg) {
+      @include text-style("body-light");
+
+      padding-top: 13px;
+    }
+  }
+
+  &__instagram-link {
+    @include text-style("button");
+
+    gap: 8px;
+    margin-top: 24px;
+    color: $color-gray-900;
+
+    @include media-up(lg) {
+      padding-top: 16px;
+      margin-top: 0;
+    }
+
+    .c-external-link__icon {
+      width: 10px;
+    }
+  }
+
+  // Figmaでは左右反転して配置されている
+  &__decoration {
+    position: absolute;
+    top: 1646px;
+    left: 142px;
+    z-index: -1;
+    width: 152px;
+    height: auto;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    transform: scaleX(-1);
+
+    @include media-up(lg) {
+      top: design-scale(1388px);
+      left: design-scale(384px);
+      width: design-scale(464px);
+    }
+  }
+}

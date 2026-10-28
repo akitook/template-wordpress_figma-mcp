@@ -1,0 +1,8 @@
+@use "../../global" as *;
+
+// 英字のセクション見出し（Figma: Our Philosophy / Works / News など）
+.c-section-heading {
+  @include text-style("heading-english");
+
+  color: $color-gray-800;
+}

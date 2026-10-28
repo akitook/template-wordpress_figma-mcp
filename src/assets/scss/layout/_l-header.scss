@@ -83,6 +83,10 @@
     a {
       color: inherit;
     }
+
+    a:not(.c-external-link) {
+      @include link-underline;
+    }
   }
 
   &__actions {

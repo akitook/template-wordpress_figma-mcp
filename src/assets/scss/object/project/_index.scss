@@ -6,6 +6,8 @@
 @use "./p-editor-content";
 @use "./p-pagination";
 @use "./p-menu";
+@use "./p-news-card";
+@use "./p-contact";
 
 .p-container {
   @include container(md);

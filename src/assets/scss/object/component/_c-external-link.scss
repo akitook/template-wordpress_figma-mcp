@@ -2,6 +2,8 @@
 
 // 外部リンク（テキスト＋右上向きの矢印）。矢印の色はテンプレート側で画像を出し分ける
 .c-external-link {
+  @include link-underline;
+
   display: inline-flex;
   gap: 6px;
   align-items: center;

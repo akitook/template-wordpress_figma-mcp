@@ -111,6 +111,33 @@
             "min": "20px",
             "max": "24px"
           }
+        },
+        {
+          "slug": "heading-small",
+          "name": "Heading Small",
+          "size": "40px",
+          "fluid": {
+            "min": "32px",
+            "max": "40px"
+          }
+        },
+        {
+          "slug": "heading",
+          "name": "Heading",
+          "size": "48px",
+          "fluid": {
+            "min": "32px",
+            "max": "48px"
+          }
+        },
+        {
+          "slug": "display",
+          "name": "Display",
+          "size": "72px",
+          "fluid": {
+            "min": "44px",
+            "max": "72px"
+          }
         }
       ]
     },
@@ -200,6 +227,13 @@
           "fontWeight": "500",
           "lineHeight": "1.8",
           "letterSpacing": "0.1em"
+        },
+        "heading-english": {
+          "fontFamily": "sans-en",
+          "fontSize": "heading",
+          "fontWeight": "100",
+          "lineHeight": "1.5",
+          "letterSpacing": "0.2em"
         }
       }
     }

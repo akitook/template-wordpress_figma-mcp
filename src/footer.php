@@ -3,6 +3,13 @@ $links = site_links();
 $contact = site_contact();
 ?>
 
+<?php
+// お問い合わせ導線（お問い合わせフォームのページでは出さない）
+if (!is_page(array('contact', 'confirm', 'complete'))) {
+  get_template_part('template-parts/contact');
+}
+?>
+
 <?php // Figma: footer_pc（PC/TAB）/ contact_sp 内の footer（SP） ?>
 <footer class="l-footer">
   <div class="l-footer__inner">
